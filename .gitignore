@@ -1,0 +1,6 @@
+.*
+!.gitignore
+*.o
+*.out
+cub3D
+notes.txt
