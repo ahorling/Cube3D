@@ -6,11 +6,13 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/10 14:54:24 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/10 16:21:14 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
+ALEX_SRC =
+FRANS_SRC = src/raycaster/raycaster.c
 SRC		= src/main.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
@@ -19,7 +21,7 @@ INCLUDE	= -I include \
 		  -I include/utils \
 		  -I MLX42/include/MLX42
 LINKS	= 
-CFLAGS	= -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS	= #-Wall -Wextra -Werror #-g -fsanitize=address
 MLXFLAGS = -lglfw -L$(shell brew --prefix glfw)/lib -framework Cocoa -framework OpenGL -framework IOKit
 MLXDIR = MLX42/
 MLXLIB = $(MLXDIR)build/libmlx42.a
@@ -38,15 +40,21 @@ $(MLXLIB):
 	@echo "Compiling MLX library."
 	@make -C $(MLXDIR)build
 
+alex:
+	$(MAKE) OBJ=$(ALEX_SRC:.c=.o) all
+
+frans:
+	$(MAKE) OBJ=$(FRANS_SRC:.c=.o) all
+
 clean:
 	@echo "Cleaning files."
 	@rm -f $(OBJ)
-	@make -C $(MLXDIR)build clean
 
 fclean: clean
+	@make -C $(MLXDIR)build clean
 	@echo "Cleaning executable."
 	@rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all alex frans clean fclean re
