@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/10 16:21:14 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/13 20:01:10 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ frans:
 clean:
 	@echo "Cleaning files."
 	@rm -f $(OBJ)
+	@rm -f $(ALEX_SRC:.c=.o)
+	@rm -f $(FRANS_SRC:.c=.o)
 
 fclean: clean
 	@make -C $(MLXDIR)build clean
