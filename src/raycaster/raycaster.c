@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/13 19:59:04 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/15 18:23:06 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,60 @@
 #include "MLX42.h"
 #include "info.h"
 
-int worldMap[24][24]=
+// int worldMap[24][24]=
+// {
+// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
+// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+// };
+
+int worldMap[8][8]=
 {
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	{1,1,1,1,1,1,1,1},
+	{1,0,1,0,0,0,0,1},
+	{1,0,1,0,0,0,0,1},
+	{1,0,1,0,0,0,0,1},
+	{1,0,0,0,0,0,0,1},
+	{1,0,0,0,0,1,0,1},
+	{1,0,0,0,0,0,0,1},
+	{1,1,1,1,1,1,1,1}
 };
 
 static mlx_image_t* image;
+
+double deg_to_rad(int a)
+{
+	return (a * M_PI / 180.0);
+}
+int fix_ang(int a)
+{
+	if (a > 359)
+		a -= 360;
+	if (a < 0)
+		a += 360;
+	return (a);
+}
 
 t_info	init_info(void)
 {
@@ -54,12 +79,12 @@ t_info	init_info(void)
 
 	info.screen_width = 1600;
 	info.screen_height = 900;
-	info.map_width = 24;
-	info.map_height = 24;
+	info.map_width = 8;
+	info.map_height = 8;
 	info.cam_plane_x = 0;
-	info.cam_plane_y = 1;
-	info.pos_x = 22;
-	info.pos_y = 12;
+	info.cam_plane_y = 0.66;
+	info.pos_x = 4;
+	info.pos_y = 2;
 	info.dir_x = -1;
 	info.dir_y = 0;
 	info.ray_dir_x = 0;
@@ -158,7 +183,7 @@ void	draw(t_info info)
 			// Check if the ray has hit a wall
 			if (worldMap[mapY][mapX] == 1)
 			{
-				draw_line(image, info.pos_x * 16, info.pos_y * 16, mapX * 16, mapY * 16, ORANGE);
+				//draw_line(image, info.pos_x * 16, info.pos_y * 16, mapX * 16, mapY * 16, ORANGE);
 				break;
 			}
 		}
@@ -236,8 +261,9 @@ void	draw_map(t_info info)
 	int		x;
 	int		y;
 
-	tile_size = 16;
+	tile_size = 64;
 	x = 0;
+	mlx_draw_rect(image, 0, 0, info.map_width * tile_size, info.map_height * tile_size, BLACK);
 	while (x < info.map_width)
 	{
 		y = 0;
@@ -245,20 +271,73 @@ void	draw_map(t_info info)
 		{
 			if (worldMap[y][x] == 1)
 			{
-				mlx_draw_rect(image, x * tile_size, y * tile_size, tile_size, tile_size, WHITE);
+				mlx_draw_rect(image, x * tile_size + 1, y * tile_size + 1, tile_size - 2, tile_size - 2, WHITE);
 			}
 			else
 			{
-				mlx_draw_rect(image, x * tile_size, y * tile_size, tile_size, tile_size, BLACK);
+				mlx_draw_rect(image, x * tile_size + 1, y * tile_size + 1, tile_size - 2, tile_size - 2, DARKGRAY);
 			}
 			y++;
 		}
 		x++;
 	}
-	mlx_draw_rect(image, info.pos_x * tile_size - tile_size * 0.5, info.pos_y * tile_size - tile_size * 0.5, tile_size, tile_size, PURPLE);
-	draw_line(image, info.pos_x * tile_size, info.pos_y * tile_size, info.pos_x * tile_size + info.dir_x * tile_size, info.pos_y * tile_size + info.dir_y * tile_size, RED);
-}
+	mlx_draw_rect(image, info.pos_x * tile_size - 2, info.pos_y * tile_size - 2, 5, 5, PURPLE);
+	draw_line(image, info.pos_x * tile_size, info.pos_y * tile_size, info.pos_x * tile_size + info.dir_x * (tile_size / 2), info.pos_y * tile_size + info.dir_y * (tile_size / 2), RED);
 
+	// int r, mx, my, mp, dof;
+	// double rx, ry, ra, xo, yo;
+	// ra = fix_ang(atan2(info.dir_y, info.dir_x) * (180.0 / M_PI) + 30); // Angle of the ray
+	// printf("ra: %f\n", ra);
+	// r = 0;
+	// while (r < 1)
+	// {
+	// 	// Draw a line from the player until you hit the horizontal part of the wall
+	// 	dof = 0; // depth of field
+	// 	double aTan = -1 / tan(ra);
+	// 	if (ra > M_PI)
+	// 	{
+	// 		ry = (((int)info.pos_y >> 6) << 6) - 0.0001;
+	// 		rx = (info.pos_y - ry) * aTan + info.pos_x;
+	// 		yo = -64;
+	// 		xo = -yo * aTan;
+	// 	}
+	// 	if (ra < M_PI)
+	// 	{
+	// 		ry = (((int)info.pos_y >> 6) << 6) + 64;
+	// 		rx = (info.pos_y - ry) * aTan + info.pos_x;
+	// 		yo = 64;
+	// 		xo = -yo * aTan;
+	// 	}
+	// 	if (ra == 0 || ra == M_PI)
+	// 	{
+	// 		rx = info.pos_x;
+	// 		ry = info.pos_y;
+	// 		dof = 8; // update this to not be hardcoded
+	// 	}
+	// 	while (dof < 8)
+	// 	{
+	// 		//printf("rx: %f, ry: %f, dof: %d, mp: %d\n", rx, ry, dof, mp);
+	// 		mx = (int)(rx) >> 6;
+	// 		my = (int)(ry) >> 6;
+	// 		mp = my * info.map_width + mx;
+	// 		if (mp > 0 && mp < info.map_width * info.map_height && worldMap[mp] == 1)
+	// 		{
+	// 			dof = 8;
+	// 		}
+	// 		else
+	// 		{
+	// 			rx += xo;
+	// 			ry += yo;
+	// 			dof += 1;
+	// 		}
+	// 	}
+	// 	//printf("rx: %f, ry: %f, dof: %d, mx: %d, my: %d, mp: %d\n", rx, ry, dof, mx, my, mp);
+	// 	draw_line(image, info.pos_x * tile_size, info.pos_y * tile_size, fabs(rx), fabs(ry), RED);
+	// 	r++;
+	// }
+
+	// // Draw a line from the player until you hit the vertical part of the wall
+}
 void	ft_hook(void *param)
 {
 	t_info	*info;
@@ -272,23 +351,27 @@ void	ft_hook(void *param)
 	double move_y = info->dir_y * movementSpeed;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(mlx, MLX_KEY_W))
 	{
 		printf("pos_x: %f, pos_y: %f\n", info->pos_x, info->pos_y);
 		if (worldMap[(int)info->pos_y][(int)(info->pos_x + move_x)] == 0)
 			info->pos_x += move_x;
 		if (worldMap[(int)(info->pos_y + move_y)][(int)info->pos_x] == 0)
 			info->pos_y += move_y;
+		draw(*info);
+		draw_map(*info);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(mlx, MLX_KEY_S))
 	{
 		printf("pos_x: %f, pos_y: %f\n", info->pos_x, info->pos_y);
 		if (worldMap[(int)info->pos_y][(int)(info->pos_x - move_x)] == 0)
 			info->pos_x -= move_x;
 		if (worldMap[(int)(info->pos_y - move_y)][(int)info->pos_x] == 0)
 			info->pos_y -= move_y;
+		draw(*info);
+		draw_map(*info);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(mlx, MLX_KEY_A))
 	{
 		double oldDirX = info->dir_x;
 		info->dir_x = info->dir_x * cos(-rotationSpeed) - info->dir_y * sin(-rotationSpeed);
@@ -296,8 +379,10 @@ void	ft_hook(void *param)
 		double oldPlaneX = info->cam_plane_x;
 		info->cam_plane_x = info->cam_plane_x * cos(-rotationSpeed) - info->cam_plane_y * sin(-rotationSpeed);
 		info->cam_plane_y = oldPlaneX * sin(-rotationSpeed) + info->cam_plane_y * cos(-rotationSpeed);
+		draw(*info);
+		draw_map(*info);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(mlx, MLX_KEY_D))
 	{
 		double oldDirX = info->dir_x;
 		info->dir_x = info->dir_x * cos(rotationSpeed) - info->dir_y * sin(rotationSpeed);
@@ -305,9 +390,9 @@ void	ft_hook(void *param)
 		double oldPlaneX = info->cam_plane_x;
 		info->cam_plane_x = info->cam_plane_x * cos(rotationSpeed) - info->cam_plane_y * sin(rotationSpeed);
 		info->cam_plane_y = oldPlaneX * sin(rotationSpeed) + info->cam_plane_y * cos(rotationSpeed);
+		draw(*info);
+		draw_map(*info);
 	}
-	draw_map(*info);
-	draw(*info);
 }
 
 // -----------------------------------------------------------------------------
@@ -328,8 +413,8 @@ int	main(int argc, char *argv[])
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	draw_map(info);
 	draw(info);
+	draw_map(info);
 	if (mlx_image_to_window(info.mlx, image, 0, 0) == -1)
 	{
 		mlx_close_window(info.mlx);

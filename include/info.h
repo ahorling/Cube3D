@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/13 18:00:58 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/15 20:28:39 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,35 @@
 
 # include "MLX42.h"
 
+// Struct with all the info needed for the raycaster
+// pa = player angle
+// px = player x position
+// py = player y position
+// pdx = player x direction
+// pdy = player y direction
+// cpx = camera plane x
+// cpy = camera plane y
+// rdx = ray direction x
+// rdy = ray direction y
 typedef struct s_info
 {
 	int		screen_width;
 	int		screen_height;
 	int		map_width;
 	int		map_height;
+	int		map_size;
 	int		**map;
-	double	cam_plane_x;
-	double	cam_plane_y;
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	ray_dir_x;
-	double	ray_dir_y;
+	int		tile_size;
+	int		fov;
+	double	pa;
+	double	px;
+	double	py;
+	double	pdx;
+	double	pdy;
+	double	cpx;
+	double	cpy;
+	double	rdx;
+	double	rdy;
 	mlx_t	*mlx;
 }			t_info;
 

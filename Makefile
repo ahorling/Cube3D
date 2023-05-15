@@ -6,13 +6,13 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/13 20:01:10 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/15 19:13:34 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
 ALEX_SRC =
-FRANS_SRC = src/raycaster/raycaster.c
+FRANS_SRC = src/raycaster/test_cast.c
 SRC		= src/main.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
