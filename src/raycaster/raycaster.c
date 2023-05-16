@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/16 20:55:11 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/16 21:31:01 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int worldMap[8][8]=
 
 static mlx_image_t* image;
 static mlx_image_t* rays;
+static mlx_texture_t* texture;
 
 double deg_to_rad(int a)
 {
@@ -219,11 +220,13 @@ void	draw(t_info info)
 		// Calculate wall height
 		int lineHeight = (int)(info.screen_height / perpWallDist);
 
+		int pitch = 100;
+
 		// Calculate draw start and end positions for the wall
-		int drawStart = -lineHeight / 2 + info.screen_height / 2;
+		int drawStart = -lineHeight / 2 + info.screen_height / 2 + pitch;
 		if (drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + info.screen_height / 2;
+		int drawEnd = lineHeight / 2 + info.screen_height / 2 + pitch;
 		if (drawEnd >= info.screen_height)
 			drawEnd = info.screen_height - 1;
 
@@ -243,14 +246,46 @@ void	draw(t_info info)
 			color = BLUE;
 		}
 		wallX -= floor((wallX));
-		int	y;
 
-		y = 0;
+		//x coordinate on the texture
+		int texWidth = texture->width;
+		int texHeight = texture->height;
+		int texX = (int)(wallX * (double)(texWidth));
+		if(side == 0 && info.rdx > 0)
+			texX = texWidth - texX - 1;
+		if(side == 1 && info.rdy < 0)
+			texX = texWidth - texX - 1;
+
+		// TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
+		// How much to increase the texture coordinate per screen pixel
+		double step = (double)texHeight / (double)lineHeight;
+		// Starting texture coordinate
+		double texPos = (drawStart - pitch - info.screen_height / 2 + lineHeight / 2) * step;
+		// for(int y = drawStart; y < drawEnd; y++)
+		// {
+		// 	// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+		// 	int texY = (int)texPos & (texHeight - 1);
+		// 	texPos += step;
+		// 	color = texture->pixels[texHeight * texY + texX];
+		// 	//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		// 	if(side == 1) color = (color >> 1) & 8355711;
+		// 	mlx_put_pixel(image, x, y, color);
+		// }
+
+		int y = 0;
 		while (y < info.screen_height)
 		{
 			if (y >= drawStart && y < drawEnd)
+			{
+				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+				int texY = (int)texPos & (texHeight - 1);
+				texPos += step;
+				color = texture->pixels[texHeight * texY + texX];
+				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+				if(side == 1) color = (color >> 1) & 8355711;
 				mlx_put_pixel(image, x, y, color);
-			else if (y < info.screen_height / 2)
+			}
+			else if (y < drawStart)
 				mlx_put_pixel(image, x, y, MAUVE);
 			else
 				mlx_put_pixel(image, x, y, PANTONE448C);
@@ -416,6 +451,7 @@ int	main(int argc, char *argv[])
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
+	texture = mlx_load_png("stone_bricks.png");
 	if (!(image = mlx_new_image(info.mlx, info.screen_width, info.screen_height)))
 	{
 		mlx_close_window(info.mlx);
