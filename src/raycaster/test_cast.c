@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/15 21:30:10 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/16 16:57:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int worldMap[]=
 	1,1,1,1,1,1,1,1,
 	1,0,1,0,0,0,0,1,
 	1,0,1,0,0,0,0,1,
-	1,0,1,0,0,0,0,1,
-	1,0,0,0,0,0,0,1,
+	1,0,1,0,1,0,0,1,
+	1,0,0,1,0,0,0,1,
 	1,0,0,0,0,1,0,1,
 	1,0,0,0,0,0,0,1,
 	1,1,1,1,1,1,1,1
@@ -62,7 +62,7 @@ t_info	init_info(void)
 	info.px = 150;
 	info.py = 400;
 	info.pdx = cos(deg_to_rad(info.pa));
-	info.pdy = -sin(deg_to_rad(info.pa));
+	info.pdy = sin(deg_to_rad(info.pa));
 	info.cpx = 0;
 	info.cpy = 0.66;
 	info.rdx = 0;
@@ -155,20 +155,22 @@ void	draw(t_info info)
 			else{ rx+=xo; ry+=yo; dof+=1;}//check next horizontal
 		}
 
+		int color = 0x00FF00FF;
 		if (disV < disH)
 		{
+			color = 0x009900FF;
 			rx=vx;
 			ry=vy;
 			disH=disV;
 		} //horizontal hit first
 
-		draw_line(image, info.px, info.py, rx, ry, RED); //draw 2d ray
+		draw_line(image, info.px, info.py, rx, ry, color); //draw 2d ray
 
 		int ca=fix_ang(info.pa-ra); disH=disH*cos(deg_to_rad(ca)); //fix fisheye 
 		int lineH = (info.map_size * 320)/(disH); if(lineH>320){ lineH=320;} //line height and limit
 		int lineOff = 160 - (lineH>>1); //line offset
 		if (lineH > 0)
-			mlx_draw_rect(image, r*8+530,lineOff,8,lineH,RED); //draw the vertical strip
+			mlx_draw_rect(image, r*8+530,lineOff,8,lineH,color); //draw the vertical strip
 		//draw_line(image, r*8+530,lineOff,r*8+530,lineOff+lineH,BLUE); //draw the vertical line
 		//(r*8+530,lineOff);
 		//glVertex2i(r*8+530,lineOff+lineH);
@@ -217,7 +219,7 @@ void	draw_player(t_info info)
 	// 	info.px + info.pdx * (info.tile_size / 2),
 	// 	info.py + info.pdy * (info.tile_size / 2), RED);
 	printf("px: %f, py: %f, pa: %f\n", info.px, info.py, info.pa);
-	draw_line(image, info.px, info.py, info.px + info.pdx * 20, info.py + info.pdy * 20, RED);
+	//draw_line(image, info.px, info.py, info.px + info.pdx * 20, info.py - info.pdy * 20, RED);
 }
 
 void	ft_hook(void *param)
@@ -235,7 +237,7 @@ void	ft_hook(void *param)
 	{
 		printf("px: %f, py: %f, pa: %f\n", info->px, info->py, info->pa);
 		info->px += info->pdx * movementSpeed;
-		info->py += info->pdy * movementSpeed;
+		info->py -= info->pdy * movementSpeed;
 		mlx_draw_rect(image, 0, 0, info->screen_width, info->screen_height, BLACK);
 		draw_map(*info);
 		draw_player(*info);
@@ -245,7 +247,7 @@ void	ft_hook(void *param)
 	{
 		printf("px: %f, py: %f, pa: %f\n", info->px, info->py, info->pa);
 		info->px -= info->pdx * movementSpeed;
-		info->py -= info->pdy * movementSpeed;
+		info->py += info->pdy * movementSpeed;
 		mlx_draw_rect(image, 0, 0, info->screen_width, info->screen_height, BLACK);
 		draw_map(*info);
 		draw_player(*info);

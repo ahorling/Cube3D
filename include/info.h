@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/15 20:28:39 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/16 14:34:48 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_info
 	int		map_size;
 	int		**map;
 	int		tile_size;
-	int		fov;
+	double	fov;
 	double	pa;
 	double	px;
 	double	py;
@@ -42,6 +42,10 @@ typedef struct s_info
 	double	pdy;
 	double	cpx;
 	double	cpy;
+	double	rx;
+	double	ry;
+	double	ra;
+	double	rda;
 	double	rdx;
 	double	rdy;
 	mlx_t	*mlx;

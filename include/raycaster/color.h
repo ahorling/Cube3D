@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/13 18:43:15 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/15 14:59:12 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/16 19:03:52 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef enum e_color
 	DARKYELLOW = 0xBDB76BFF,
 	DARKBROWN = 0x8B4513FF,
 	DARKSKYBLUE = 0x00BFFFFF,
+	PANTONE448C = 0x4A412AFF,
+	MAUVE = 0xE0B0FFFF,
 }				t_color;
 
 #endif
