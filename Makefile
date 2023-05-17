@@ -6,14 +6,15 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/16 18:48:04 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/17 17:02:38 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
-ALEX_SRC =
-FRANS_SRC = src/raycaster/raycaster.c
-SRC		= src/main.c
+SRC		= src/raycaster/minimap.c \
+			src/raycaster/raycaster.c \
+			src/utils/draw_rectangle.c \
+			src/utils/rectangle.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
 		  -I include/parser \
@@ -40,12 +41,6 @@ $(MLXLIB):
 	@echo "Compiling MLX library."
 	@make -C $(MLXDIR)build
 
-alex:
-	$(MAKE) OBJ=$(ALEX_SRC:.c=.o) all
-
-frans:
-	$(MAKE) OBJ=$(FRANS_SRC:.c=.o) all
-
 clean:
 	@echo "Cleaning files."
 	@rm -f $(OBJ)
@@ -59,4 +54,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all alex frans clean fclean re
+.PHONY: all clean fclean re

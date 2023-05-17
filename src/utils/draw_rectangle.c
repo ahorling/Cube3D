@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   info.h                                             :+:    :+:            */
+/*   draw_rectangle.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/17 14:27:40 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/17 14:43:05 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/17 17:33:15 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#include "MLX42.h"
+#include "rectangle.h"
 
-typedef struct s_info
+// Draws a rectangle on the image.
+void	draw_rect(mlx_image_t *image, t_rectangle rec, uint32_t color)
 {
-	int		floor_color;
-	int		ceiling_color;
-	char	*north_texture;
-	char	*east_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	player_direction;
-	int		player_x;
-	int		player_y;
-	int		map_width;
-	int		map_height;
-	int		**map;
-} 			t_info;
+	int32_t	i;
+	int32_t	j;
 
-#endif
+	i = rec.x;
+	while (i < rec.width + rec.x)
+	{
+		j = rec.y;
+		while (j < rec.height + rec.y)
+		{
+			mlx_put_pixel(image, i, j, color);
+			j++;
+		}
+		i++;
+	}
+}

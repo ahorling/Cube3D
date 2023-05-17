@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/16 21:31:01 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/17 17:53:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "color.h"
-#include "MLX42.h"
+#include "draw_rectangle.h"
 #include "info.h"
-
-// int worldMap[24][24]=
-// {
-// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-// 	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-// 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-// };
+#include "minimap.h"
+#include "MLX42.h"
+#include "raycaster.h"
+#include "rectangle.h"
 
 int worldMap[8][8]=
 {
@@ -58,7 +34,6 @@ int worldMap[8][8]=
 	{1,1,1,1,1,1,1,1}
 };
 
-static mlx_image_t* image;
 static mlx_image_t* rays;
 static mlx_texture_t* texture;
 
@@ -75,24 +50,67 @@ int fix_ang(int a)
 	return (a);
 }
 
-t_info	init_info(void)
+int	**convert_worldmap(void)
 {
-	t_info	info;
+	int	**map;
+	int	i;
+	int	j;
 
-	info.screen_width = 800;
-	info.screen_height = 600;
-	info.map_width = 8;
-	info.map_height = 8;
-	info.cpx = 0;
-	info.cpy = 0.66;
-	info.px = 4;
-	info.py = 2;
-	info.pdx = -1;
-	info.pdy = 0;
-	info.rdx = 0;
-	info.rdy = 0;
-	info.mlx = mlx_init(info.screen_width, info.screen_height, "cub3D", true);
-	return (info);
+	map = malloc(sizeof(int *) * 8);
+	if (!map)
+		return (NULL);
+	i = 0;
+	while (i < 8)
+	{
+		map[i] = malloc(sizeof(int) * 8);
+		if (!map[i])
+			return (NULL);
+		j = 0;
+		while (j < 8)
+		{
+			map[i][j] = worldMap[i][j];
+			printf("map: %d, worldMap: %d\n", map[i][j], worldMap[i][j]);
+			j++;
+		}
+		i++;
+	}
+	return (map);
+}
+
+void	free_map(t_raycaster rc, int **map)
+{
+	int	i;
+
+	i = 0;
+	while (i < rc.map_height)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+t_raycaster	init_raycaster(void)
+{
+	t_raycaster	rc;
+	rc.floor_color = DARKGRAY;
+	rc.ceiling_color = SKYBLUE;
+	rc.screen_width = 1280;
+	rc.screen_height = 800;
+	rc.map_width = 8;
+	rc.map_height = 8;
+	rc.map = convert_worldmap();
+	rc.tile_size = 32;
+	rc.cpx = 0;
+	rc.cpy = 0.66;
+	rc.px = 4;
+	rc.py = 2;
+	rc.pdx = 1;
+	rc.pdy = 0;
+	rc.rdx = 0;
+	rc.rdy = 0;
+	rc.mlx = mlx_init(rc.screen_width, rc.screen_height, "cub3D", true);
+	return (rc);
 }
 
 /* Function that draws a line from 1 point to another using bresenheim algorithm */
@@ -129,40 +147,35 @@ void	draw_line(mlx_image_t* image, int x0, int y0, int x1, int y1, uint32_t colo
 	}
 }
 
-void	mlx_draw_rect(mlx_image_t* image, int32_t x, int32_t y, int32_t width, int32_t height, uint32_t color)
+void	clear_screen(t_raycaster rc)
 {
-	for (int32_t i = x; i < x + width; ++i)
-	{
-		for (int32_t j = y; j < y + height; ++j)
-		{
-			mlx_put_pixel(image, i, j, color);
-		}
-	}
+	draw_rect(rc.screen, rect(0, 0, rc.screen_width, rc.screen_height), BLACK);
+	draw_rect(rays, rect(0, 0, rc.map_width * rc.tile_size, rc.map_height * rc.tile_size), TRANSPARENT);
 }
 
-void	draw(t_info info)
+void	draw(t_raycaster rc)
 {
-	int		side;
+	int	side;
 
-	mlx_draw_rect(image, 0, 0, info.screen_width, info.screen_height, BLACK);
-	for (int x = 0; x < info.screen_width; x++)
+	clear_screen(rc);
+	for (int x = 0; x < rc.screen_width; x++)
 	{
 		// Calculate ray direction and initial position
-		double cameraX = 2 * x / (double)info.screen_width - 1;
-		info.rdx = info.pdx + info.cpx * cameraX;
-		info.rdy = info.pdy + info.cpy * cameraX;
+		double cameraX = 2 * x / (double)rc.screen_width - 1;
+		rc.rdx = rc.pdx + rc.cpx * cameraX;
+		rc.rdy = rc.pdy + rc.cpy * cameraX;
 
 		// Map position
-		int mapX = (int)info.px;
-		int mapY = (int)info.py;
+		int mapX = (int)rc.px;
+		int mapY = (int)rc.py;
 
 		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
 
 		// Delta distance calculation
-		double deltaDistX = (info.rdx == 0) ? 1e30 : fabs(1 / info.rdx);
-		double deltaDistY = (info.rdy == 0) ? 1e30 : fabs(1 / info.rdy);
+		double deltaDistX = (rc.rdx == 0) ? 1e30 : fabs(1 / rc.rdx);
+		double deltaDistY = (rc.rdy == 0) ? 1e30 : fabs(1 / rc.rdy);
 		double perpWallDist;
 
 		// Step calculation
@@ -172,20 +185,20 @@ void	draw(t_info info)
 		int hit = 0;
 		int side;
 
-		if (info.rdx < 0) {
+		if (rc.rdx < 0) {
 			stepX = -1;
-			sideDistX = (info.px - mapX) * deltaDistX;
+			sideDistX = (rc.px - mapX) * deltaDistX;
 		} else {
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - info.px) * deltaDistX;
+			sideDistX = (mapX + 1.0 - rc.px) * deltaDistX;
 		}
 
-		if (info.rdy < 0) {
+		if (rc.rdy < 0) {
 			stepY = -1;
-			sideDistY = (info.py - mapY) * deltaDistY;
+			sideDistY = (rc.py - mapY) * deltaDistY;
 		} else {
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - info.py) * deltaDistY;
+			sideDistY = (mapY + 1.0 - rc.py) * deltaDistY;
 		}
 
 		// Perform DDA
@@ -203,12 +216,10 @@ void	draw(t_info info)
 			}
 
 			// Check if the ray has hit a wall
-			if (worldMap[mapY][mapX] == 1)
-			{
-				//draw_line(image, info.px * 16, info.py * 16, mapX * 16, mapY * 16, ORANGE);
+			if (rc.map[mapY][mapX] == 1)
 				break;
-			}
 		}
+		// draw_line(rays, rc.px * rc.tile_size, rc.py * rc.tile_size, mapX * rc.tile_size, mapY * rc.tile_size, ORANGE);
 
 		// Calculate distance to the wall
 		if (side == 0) {
@@ -218,49 +229,48 @@ void	draw(t_info info)
 		}
 
 		// Calculate wall height
-		int lineHeight = (int)(info.screen_height / perpWallDist);
+		int lineHeight = (int)(rc.screen_height / perpWallDist);
 
-		int pitch = 100;
+		int pitch = 0;
 
 		// Calculate draw start and end positions for the wall
-		int drawStart = -lineHeight / 2 + info.screen_height / 2 + pitch;
+		int drawStart = -lineHeight / 2 + rc.screen_height / 2 + pitch;
 		if (drawStart < 0)
 			drawStart = 0;
-		int drawEnd = lineHeight / 2 + info.screen_height / 2 + pitch;
-		if (drawEnd >= info.screen_height)
-			drawEnd = info.screen_height - 1;
+		int drawEnd = lineHeight / 2 + rc.screen_height / 2 + pitch;
+		if (drawEnd >= rc.screen_height)
+			drawEnd = rc.screen_height - 1;
 
-		int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
+		int texNum = rc.map[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
 
 		// Draw the wall column
 		double wallX; //where exactly the wall was hit
 		int color;
 		if(side == 0)
 		{
-			wallX = info.py + perpWallDist * info.rdy;
+			wallX = rc.py + perpWallDist * rc.rdy;
 			color = RED;
 		}
 		else
 		{
-			wallX = info.px + perpWallDist * info.rdx;
+			wallX = rc.px + perpWallDist * rc.rdx;
 			color = BLUE;
 		}
 		wallX -= floor((wallX));
-
 		//x coordinate on the texture
 		int texWidth = texture->width;
 		int texHeight = texture->height;
 		int texX = (int)(wallX * (double)(texWidth));
-		if(side == 0 && info.rdx > 0)
+		if(side == 0 && rc.rdx > 0)
 			texX = texWidth - texX - 1;
-		if(side == 1 && info.rdy < 0)
+		if(side == 1 && rc.rdy < 0)
 			texX = texWidth - texX - 1;
 
 		// TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
 		// How much to increase the texture coordinate per screen pixel
 		double step = (double)texHeight / (double)lineHeight;
 		// Starting texture coordinate
-		double texPos = (drawStart - pitch - info.screen_height / 2 + lineHeight / 2) * step;
+		double texPos = (drawStart - pitch - rc.screen_height / 2 + lineHeight / 2) * step;
 		// for(int y = drawStart; y < drawEnd; y++)
 		// {
 		// 	// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
@@ -269,173 +279,96 @@ void	draw(t_info info)
 		// 	color = texture->pixels[texHeight * texY + texX];
 		// 	//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		// 	if(side == 1) color = (color >> 1) & 8355711;
-		// 	mlx_put_pixel(image, x, y, color);
+		// 	mlx_put_pixel(rc.screen, x, y, color);
 		// }
 
 		int y = 0;
-		while (y < info.screen_height)
+		while (y < rc.screen_height)
 		{
 			if (y >= drawStart && y < drawEnd)
 			{
 				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 				int texY = (int)texPos & (texHeight - 1);
 				texPos += step;
-				color = texture->pixels[texHeight * texY + texX];
+				// color = texture->pixels[texHeight * texY + texX];
+				color = GRAY;
 				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 				if(side == 1) color = (color >> 1) & 8355711;
-				mlx_put_pixel(image, x, y, color);
+				mlx_put_pixel(rc.screen, x, y, color);
 			}
 			else if (y < drawStart)
-				mlx_put_pixel(image, x, y, MAUVE);
+				mlx_put_pixel(rc.screen, x, y, SKYBLUE);
 			else
-				mlx_put_pixel(image, x, y, PANTONE448C);
+				mlx_put_pixel(rc.screen, x, y, DARKBROWN);
 			y++;
 		}
 	}
 }
 
-/* Draw a minimap that shows the walls and the player position.
-Make it so that every tile is 16 by 16 and every tile has a 1 pixel on its edge.
-
-Lastly, draw a direction line from the player.*/
-void	draw_map(t_info info)
+void	draw_player(t_raycaster rc)
 {
-	int		tile_size;
-	int		x;
-	int		y;
-
-	tile_size = 32;
-	x = 0;
-	mlx_draw_rect(image, 0, 0, info.map_width * tile_size, info.map_height * tile_size, BLACK);
-	while (x < info.map_width)
-	{
-		y = 0;
-		while (y < info.map_height)
-		{
-			if (worldMap[y][x] == 1)
-			{
-				mlx_draw_rect(image, x * tile_size + 1, y * tile_size + 1, tile_size - 2, tile_size - 2, WHITE);
-			}
-			else
-			{
-				mlx_draw_rect(image, x * tile_size + 1, y * tile_size + 1, tile_size - 2, tile_size - 2, DARKGRAY);
-			}
-			y++;
-		}
-		x++;
-	}
-	mlx_draw_rect(image, info.px * tile_size - 2, info.py * tile_size - 2, 5, 5, PURPLE);
-	draw_line(image, info.px * tile_size, info.py * tile_size, info.px * tile_size + info.pdx * (tile_size / 2), info.py * tile_size + info.pdy * (tile_size / 2), RED);
-
-	// int r, mx, my, mp, dof;
-	// double rx, ry, ra, xo, yo;
-	// ra = fix_ang(atan2(info.pdy, info.pdx) * (180.0 / M_PI) + 30); // Angle of the ray
-	// printf("ra: %f\n", ra);
-	// r = 0;
-	// while (r < 1)
-	// {
-	// 	// Draw a line from the player until you hit the horizontal part of the wall
-	// 	dof = 0; // depth of field
-	// 	double aTan = -1 / tan(ra);
-	// 	if (ra > M_PI)
-	// 	{
-	// 		ry = (((int)info.py >> 6) << 6) - 0.0001;
-	// 		rx = (info.py - ry) * aTan + info.px;
-	// 		yo = -64;
-	// 		xo = -yo * aTan;
-	// 	}
-	// 	if (ra < M_PI)
-	// 	{
-	// 		ry = (((int)info.py >> 6) << 6) + 64;
-	// 		rx = (info.py - ry) * aTan + info.px;
-	// 		yo = 64;
-	// 		xo = -yo * aTan;
-	// 	}
-	// 	if (ra == 0 || ra == M_PI)
-	// 	{
-	// 		rx = info.px;
-	// 		ry = info.py;
-	// 		dof = 8; // update this to not be hardcoded
-	// 	}
-	// 	while (dof < 8)
-	// 	{
-	// 		//printf("rx: %f, ry: %f, dof: %d, mp: %d\n", rx, ry, dof, mp);
-	// 		mx = (int)(rx) >> 6;
-	// 		my = (int)(ry) >> 6;
-	// 		mp = my * info.map_width + mx;
-	// 		if (mp > 0 && mp < info.map_width * info.map_height && worldMap[mp] == 1)
-	// 		{
-	// 			dof = 8;
-	// 		}
-	// 		else
-	// 		{
-	// 			rx += xo;
-	// 			ry += yo;
-	// 			dof += 1;
-	// 		}
-	// 	}
-	// 	//printf("rx: %f, ry: %f, dof: %d, mx: %d, my: %d, mp: %d\n", rx, ry, dof, mx, my, mp);
-	// 	draw_line(image, info.px * tile_size, info.py * tile_size, fabs(rx), fabs(ry), RED);
-	// 	r++;
-	// }
-
-	// // Draw a line from the player until you hit the vertical part of the wall
+	draw_rect(rc.screen, rect(rc.px * rc.tile_size - 2, rc.py * rc.tile_size - 2, 5, 5), PURPLE);
+	draw_line(rc.screen, rc.px * rc.tile_size, rc.py * rc.tile_size, rc.px * rc.tile_size + rc.pdx * (rc.tile_size / 2), rc.py * rc.tile_size + rc.pdy * (rc.tile_size / 2), RED);
 }
 
 void	ft_hook(void *param)
 {
-	t_info	*info;
+	t_raycaster	*rc;
 	mlx_t	*mlx;
 	double rotationSpeed = 0.05; // Adjust the value as needed
 	double movementSpeed = 0.05; // Adjust the value as needed
 
-	info = param;
-	mlx = info->mlx;
-	double move_x = info->pdx * movementSpeed;
-	double move_y = info->pdy * movementSpeed;
+	rc = param;
+	mlx = rc->mlx;
+	double move_x = rc->pdx * movementSpeed;
+	double move_y = rc->pdy * movementSpeed;
 	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_W))
+	if (mlx_is_key_down(mlx, MLX_KEY_W) || mlx_is_key_down(mlx, MLX_KEY_UP))
 	{
-		printf("px: %f, py: %f\n", info->px, info->py);
-		if (worldMap[(int)info->py][(int)(info->px + move_x)] == 0)
-			info->px += move_x;
-		if (worldMap[(int)(info->py + move_y)][(int)info->px] == 0)
-			info->py += move_y;
-		draw(*info);
-		draw_map(*info);
+		printf("px: %f, py: %f\n", rc->px, rc->py);
+		if (rc->map[(int)rc->py][(int)(rc->px + move_x)] == 0)
+			rc->px += move_x;
+		if (rc->map[(int)(rc->py + move_y)][(int)rc->px] == 0)
+			rc->py += move_y;
+		draw(*rc);
+		draw_map(*rc);
+		draw_player(*rc);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_S))
+	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
 	{
-		printf("px: %f, py: %f\n", info->px, info->py);
-		if (worldMap[(int)info->py][(int)(info->px - move_x)] == 0)
-			info->px -= move_x;
-		if (worldMap[(int)(info->py - move_y)][(int)info->px] == 0)
-			info->py -= move_y;
-		draw(*info);
-		draw_map(*info);
+		printf("px: %f, py: %f\n", rc->px, rc->py);
+		if (rc->map[(int)rc->py][(int)(rc->px - move_x)] == 0)
+			rc->px -= move_x;
+		if (rc->map[(int)(rc->py - move_y)][(int)rc->px] == 0)
+			rc->py -= move_y;
+		draw(*rc);
+		draw_map(*rc);
+		draw_player(*rc);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_A))
+	if (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_LEFT))
 	{
-		double oldDirX = info->pdx;
-		info->pdx = info->pdx * cos(rotationSpeed) - info->pdy * sin(rotationSpeed);
-		info->pdy = oldDirX * sin(rotationSpeed) + info->pdy * cos(rotationSpeed);
-		double oldPlaneX = info->cpx;
-		info->cpx = info->cpx * cos(rotationSpeed) - info->cpy * sin(rotationSpeed);
-		info->cpy = oldPlaneX * sin(rotationSpeed) + info->cpy * cos(rotationSpeed);
-		draw(*info);
-		draw_map(*info);
+		double oldDirX = rc->pdx;
+		rc->pdx = rc->pdx * cos(rotationSpeed) - rc->pdy * sin(rotationSpeed);
+		rc->pdy = oldDirX * sin(rotationSpeed) + rc->pdy * cos(rotationSpeed);
+		double oldPlaneX = rc->cpx;
+		rc->cpx = rc->cpx * cos(rotationSpeed) - rc->cpy * sin(rotationSpeed);
+		rc->cpy = oldPlaneX * sin(rotationSpeed) + rc->cpy * cos(rotationSpeed);
+		draw(*rc);
+		draw_map(*rc);
+		draw_player(*rc);
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_D))
+	if (mlx_is_key_down(mlx, MLX_KEY_D) || mlx_is_key_down(mlx, MLX_KEY_RIGHT))
 	{
-		double oldDirX = info->pdx;
-		info->pdx = info->pdx * cos(-rotationSpeed) - info->pdy * sin(-rotationSpeed);
-		info->pdy = oldDirX * sin(-rotationSpeed) + info->pdy * cos(-rotationSpeed);
-		double oldPlaneX = info->cpx;
-		info->cpx = info->cpx * cos(-rotationSpeed) - info->cpy * sin(-rotationSpeed);
-		info->cpy = oldPlaneX * sin(-rotationSpeed) + info->cpy * cos(-rotationSpeed);
-		draw(*info);
-		draw_map(*info);
+		double oldDirX = rc->pdx;
+		rc->pdx = rc->pdx * cos(-rotationSpeed) - rc->pdy * sin(-rotationSpeed);
+		rc->pdy = oldDirX * sin(-rotationSpeed) + rc->pdy * cos(-rotationSpeed);
+		double oldPlaneX = rc->cpx;
+		rc->cpx = rc->cpx * cos(-rotationSpeed) - rc->cpy * sin(-rotationSpeed);
+		rc->cpy = oldPlaneX * sin(-rotationSpeed) + rc->cpy * cos(-rotationSpeed);
+		draw(*rc);
+		draw_map(*rc);
+		draw_player(*rc);
 	}
 }
 
@@ -443,31 +376,33 @@ void	ft_hook(void *param)
 
 int	main(int argc, char *argv[])
 {
-	t_info	info;
+	t_raycaster	rc;
 
-	info = init_info();
-	if (!info.mlx)
+	rc = init_raycaster();
+	if (!rc.mlx)
 	{
 		puts(mlx_strerror(mlx_errno));
 		return (EXIT_FAILURE);
 	}
 	texture = mlx_load_png("stone_bricks.png");
-	if (!(image = mlx_new_image(info.mlx, info.screen_width, info.screen_height)))
+	if (!(rc.screen = mlx_new_image(rc.mlx, rc.screen_width, rc.screen_height)) || !(rays = mlx_new_image(rc.mlx, rc.map_width * rc.tile_size, rc.map_height * rc.tile_size)))
 	{
-		mlx_close_window(info.mlx);
+		mlx_close_window(rc.mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	draw(info);
-	draw_map(info);
-	if (mlx_image_to_window(info.mlx, image, 0, 0) == -1)
+	draw(rc);
+	draw_map(rc);
+	draw_player(rc);
+	if (mlx_image_to_window(rc.mlx, rc.screen, 0, 0) == -1 || mlx_image_to_window(rc.mlx, rays, 0, 0) == -1)
 	{
-		mlx_close_window(info.mlx);
+		mlx_close_window(rc.mlx);
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	mlx_loop_hook(info.mlx, ft_hook, &info);
-	mlx_loop(info.mlx);
-	mlx_terminate(info.mlx);
+	mlx_loop_hook(rc.mlx, ft_hook, &rc);
+	mlx_loop(rc.mlx);
+	mlx_terminate(rc.mlx);
+	free_map(rc, rc.map);
 	return (EXIT_SUCCESS);
 }

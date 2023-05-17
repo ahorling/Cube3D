@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   info.h                                             :+:    :+:            */
+/*   rectangle.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/17 14:27:40 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/17 14:55:45 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/17 14:56:19 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#include "rectangle.h"
 
-typedef struct s_info
+// Creates a rectangle struct.
+t_rectangle	rect(int x, int y, int width, int height)
 {
-	int		floor_color;
-	int		ceiling_color;
-	char	*north_texture;
-	char	*east_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	player_direction;
-	int		player_x;
-	int		player_y;
-	int		map_width;
-	int		map_height;
-	int		**map;
-} 			t_info;
+	t_rectangle	out;
 
-#endif
+	out.x = x;
+	out.y = y;
+	out.width = width;
+	out.height = height;
+	return (out);
+}
