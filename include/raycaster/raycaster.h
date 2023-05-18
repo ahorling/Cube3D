@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/17 13:52:54 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/17 17:48:47 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/18 18:19:46 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 // rda = ray delta angle
 // rdx = ray direction x
 // rdy = ray direction y
+// s_dist_x = side distance x
+// s_dist_y = side distance y
+// mspeed = movement speed of the player
+// rspeed = rotation speed of the player
 
 typedef struct s_raycaster
 {
@@ -41,19 +45,30 @@ typedef struct s_raycaster
 	int			map_height;
 	int			**map;
 	int			tile_size;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
 	double		pa;
 	double		px;
 	double		py;
 	double		pdx;
 	double		pdy;
+	double		cx;
 	double		cpx;
 	double		cpy;
+	double		d_dist_x;
+	double		d_dist_y;
 	double		rx;
 	double		ry;
 	double		ra;
 	double		rda;
 	double		rdx;
 	double		rdy;
+	double		s_dist_x;
+	double		s_dist_y;
+	double		mspeed;
+	double		rspeed;
 	mlx_t		*mlx;
 }				t_raycaster;
 
