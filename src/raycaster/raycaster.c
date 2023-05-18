@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/18 15:40:29 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/18 15:47:39 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -416,7 +416,7 @@ int	main(int argc, char *argv[])
 	}
 	texture[0] = mlx_load_png("mario2.png");
 	texture[1] = mlx_load_png("stone.png");
-	texture[2] = mlx_load_png("stone_wall.png");
+	texture[2] = mlx_load_png("archer.png");
 	texture[3] = mlx_load_png("wt_logo.png");
 	if (!(rc.screen = mlx_new_image(rc.mlx, rc.screen_width, rc.screen_height)) || !(rays = mlx_new_image(rc.mlx, rc.map_width * rc.tile_size, rc.map_height * rc.tile_size)))
 	{
