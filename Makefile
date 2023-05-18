@@ -6,12 +6,23 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/18 15:29:38 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/18 21:31:56 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
-SRC		= src/raycaster/minimap.c \
+SRC		= src/main.c \
+			src/parser/errors.c \
+			src/parser/file_checker.c \
+			src/parser/initialize.c \
+			src/parser/parser.c \
+			src/parser/parse_utils/ft_strchr.c \
+			src/parser/parse_utils/ft_strcmp.c \
+			src/parser/parse_utils/ft_strjoin.c \
+			src/parser/parse_utils/ft_strlen.c \
+			src/parser/parse_utils/ft_strrchr.c \
+			src/parser/parse_utils/get_lines.c \
+			src/raycaster/minimap.c \
 			src/raycaster/raycaster.c \
 			src/utils/draw_line.c \
 			src/utils/draw_rectangle.c \
@@ -20,6 +31,7 @@ SRC		= src/raycaster/minimap.c \
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
 		  -I include/parser \
+		  -I include/parser/parse_utils \
 		  -I include/raycaster \
 		  -I include/utils \
 		  -I MLX42/include/MLX42
