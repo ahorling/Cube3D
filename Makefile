@@ -6,14 +6,16 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/17 17:02:38 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/18 15:29:38 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
 SRC		= src/raycaster/minimap.c \
 			src/raycaster/raycaster.c \
+			src/utils/draw_line.c \
 			src/utils/draw_rectangle.c \
+			src/utils/point.c \
 			src/utils/rectangle.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
