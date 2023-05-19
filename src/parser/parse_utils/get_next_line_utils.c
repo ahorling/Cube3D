@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_lines.h                                        :+:    :+:            */
+/*   get_next_line_utils.c                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 21:30:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:04:37 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 19:24:55 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 20:04:36 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_LINES_H
-# define GET_LINES_H
+#include <stdlib.h>
+#include "ft_strdup.h"
+#include "ft_strjoin.h"
 
-char	*get_file_content(char *path);
+char	*add_to_buffer(char *buffer, char *filler)
+{
+	char	*new_buffer;
 
-#endif
+	if (!buffer && !filler)
+		return (NULL);
+	if (buffer == NULL)
+		return (ft_strdup(filler));
+	else
+		new_buffer = ft_strjoin(buffer, filler);
+	if (new_buffer == NULL)
+		return (NULL);
+	free(buffer);
+	buffer = NULL;
+	return (new_buffer);
+}

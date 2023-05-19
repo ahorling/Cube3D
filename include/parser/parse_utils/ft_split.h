@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_lines.h                                        :+:    :+:            */
+/*   ft_split.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 21:30:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:04:37 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 15:32:24 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 15:33:05 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_LINES_H
-# define GET_LINES_H
+#ifndef FT_SPLIT_H
+# define FT_SPLIT_H
 
-char	*get_file_content(char *path);
+char	**ft_split(char const *s, char c);
 
 #endif

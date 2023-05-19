@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_lines.h                                        :+:    :+:            */
+/*   colours.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 21:30:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:04:37 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 21:49:18 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 21:50:04 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_LINES_H
-# define GET_LINES_H
+#ifndef COLOURS_H
+# define COLOURS_H
 
-char	*get_file_content(char *path);
+int	get_code(char *string, int skip);
 
 #endif

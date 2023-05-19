@@ -6,22 +6,32 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/18 21:31:56 by ahorling      ########   odam.nl          #
+#    Updated: 2023/05/19 21:48:33 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
 SRC		= src/main.c \
+			src/parser/colours.c \
 			src/parser/errors.c \
 			src/parser/file_checker.c \
 			src/parser/initialize.c \
+			src/parser/parse_map.c \
+			src/parser/parse_textures.c \
 			src/parser/parser.c \
+			src/parser/parse_utils/ft_atoi.c \
+			src/parser/parse_utils/ft_memchr.c \
+			src/parser/parse_utils/ft_split.c \
 			src/parser/parse_utils/ft_strchr.c \
 			src/parser/parse_utils/ft_strcmp.c \
+			src/parser/parse_utils/ft_strdup.c \
 			src/parser/parse_utils/ft_strjoin.c \
 			src/parser/parse_utils/ft_strlen.c \
+			src/parser/parse_utils/ft_strncmp.c \
 			src/parser/parse_utils/ft_strrchr.c \
-			src/parser/parse_utils/get_lines.c \
+			src/parser/parse_utils/ft_substr.c \
+			src/parser/parse_utils/get_next_line.c \
+			src/parser/parse_utils/get_next_line_utils.c \
 			src/raycaster/minimap.c \
 			src/raycaster/raycaster.c \
 			src/utils/draw_line.c \

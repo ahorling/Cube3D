@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_lines.h                                        :+:    :+:            */
+/*   ft_atoi.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 21:30:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:04:37 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 21:52:07 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 21:52:09 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_LINES_H
-# define GET_LINES_H
+#ifndef FT_ATOI_H
+# define FT_ATOI_H
 
-char	*get_file_content(char *path);
+# include <stdlib.h>
+
+size_t	ft_atoi(const char *str);
 
 #endif

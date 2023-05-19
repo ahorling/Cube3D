@@ -1,4 +1,4 @@
-# Install script for directory: /Users/fholwerd/Documents/Codam_Core_Curriculum/cub3d/MLX42
+# Install script for directory: /Users/ahorling/Desktop/KuubDrieDee/MLX42
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/fholwerd/Documents/Codam_Core_Curriculum/cub3d/MLX42/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/ahorling/Desktop/KuubDrieDee/MLX42/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

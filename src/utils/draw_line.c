@@ -6,11 +6,12 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 12:53:42 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/18 15:30:13 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/19 16:15:44 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdlib.h>
 #include "draw_line.h"
 #include "MLX42.h"
 #include "point.h"
