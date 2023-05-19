@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/17 13:52:54 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 15:27:39 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/19 20:19:13 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ typedef struct s_raycaster
 	double			mspeed;
 	double			rspeed;
 	int				pitch;
-	int				tex_height;
-	int				tex_width;
 	int				tex_x;
 	int				tex_y;
 	int				tex_num;
@@ -90,6 +88,9 @@ typedef struct s_raycaster
 	double			wall_x;
 	mlx_t			*mlx;
 	mlx_texture_t	*tex;
+	mlx_texture_t	*textures[4];
 }					t_raycaster;
+
+void	raycast(t_raycaster *rc);
 
 #endif

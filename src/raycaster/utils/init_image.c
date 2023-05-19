@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   put_pixel.c                                        :+:    :+:            */
+/*   init_image.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/19 12:08:46 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 19:32:47 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/19 19:58:54 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/19 19:59:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42.h"
+#include "stop.h"
 
-// Puts a pixel on the image.
-void	put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
+mlx_image_t	*init_image(mlx_t *mlx, int width, int height)
 {
-	if (x < 0 || x >= (int)image->width || y < 0 || y >= (int)image->height)
-		return ;
-	mlx_put_pixel(image, x, y, color);
+	mlx_image_t	*image;
+
+	image = mlx_new_image(mlx, width, height);
+	if (!image)
+		stop("Failed to initialize image");
+	return (image);
 }

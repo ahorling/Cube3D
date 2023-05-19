@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   put_pixel.c                                        :+:    :+:            */
+/*   image_to_window.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/19 12:08:46 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 19:32:47 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/19 19:54:49 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/19 19:57:18 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42.h"
+#include "stop.h"
 
-// Puts a pixel on the image.
-void	put_pixel(mlx_image_t *image, int x, int y, uint32_t color)
+// Puts an image on the mlx image.
+void	image_to_window(mlx_t *mlx, mlx_image_t *image, int x, int y)
 {
-	if (x < 0 || x >= (int)image->width || y < 0 || y >= (int)image->height)
-		return ;
-	mlx_put_pixel(image, x, y, color);
+	if (mlx_image_to_window(mlx, image, x, y) == -1)
+		stop("Failed to put image to window");
 }
