@@ -9,11 +9,6 @@
 cub3D
 
 # MLX42
-MLX42/build/CMakeFiles/mlx42.dir/lib/
-MLX42/build/CMakeFiles/mlx42.dir/mlx_frag_shader.c.o.d
-MLX42/build/CMakeFiles/mlx42.dir/mlx_vert_shader.c.o.d
-MLX42/build/CMakeFiles/mlx42.dir/src/
-MLX42/build/mlx_frag_shader.c
-MLX42/build/mlx_vert_shader.c
+MLX42/build/*
 
 # PNG

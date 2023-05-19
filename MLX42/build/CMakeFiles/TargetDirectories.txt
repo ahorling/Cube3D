@@ -1,3 +1,0 @@
-/Users/ahorling/Desktop/KuubDrieDee/MLX42/build/CMakeFiles/mlx42.dir
-/Users/ahorling/Desktop/KuubDrieDee/MLX42/build/CMakeFiles/edit_cache.dir
-/Users/ahorling/Desktop/KuubDrieDee/MLX42/build/CMakeFiles/rebuild_cache.dir

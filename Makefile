@@ -6,12 +6,15 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/19 21:48:33 by ahorling      ########   odam.nl          #
+#    Updated: 2023/05/19 22:13:10 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
-SRC		= src/main.c \
+SRC		= src/cub3d.c \
+			src/stop.c \
+			src/raycaster/draw_walls.c \
+			src/main.c \
 			src/parser/colours.c \
 			src/parser/errors.c \
 			src/parser/file_checker.c \
@@ -33,20 +36,28 @@ SRC		= src/main.c \
 			src/parser/parse_utils/get_next_line.c \
 			src/parser/parse_utils/get_next_line_utils.c \
 			src/raycaster/minimap.c \
+			src/raycaster/movement.c \
 			src/raycaster/raycaster.c \
-			src/utils/draw_line.c \
-			src/utils/draw_rectangle.c \
-			src/utils/point.c \
-			src/utils/rectangle.c
+			src/raycaster/utils/correct_color.c \
+			src/raycaster/utils/deg_to_rad.c \
+			src/raycaster/utils/draw_line.c \
+			src/raycaster/utils/draw_rectangle.c \
+			src/raycaster/utils/fix_ang.c \
+			src/raycaster/utils/image_to_window.c \
+			src/raycaster/utils/init_image.c \
+			src/raycaster/utils/load_texture.c \
+			src/raycaster/utils/point.c \
+			src/raycaster/utils/put_pixel.c \
+			src/raycaster/utils/rectangle.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
 		  -I include/parser \
 		  -I include/parser/parse_utils \
 		  -I include/raycaster \
-		  -I include/utils \
+		  -I include/raycaster/utils \
 		  -I MLX42/include/MLX42
 LINKS	= 
-CFLAGS	= #-Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror #-g -fsanitize=address
 MLXFLAGS = -lglfw -L$(shell brew --prefix glfw)/lib -framework Cocoa -framework OpenGL -framework IOKit
 MLXDIR = MLX42/
 MLXLIB = $(MLXDIR)build/libmlx42.a
@@ -63,6 +74,7 @@ $(NAME): $(OBJ)
 
 $(MLXLIB):
 	@echo "Compiling MLX library."
+	@cmake -S $(MLXDIR) -B $(MLXDIR)build
 	@make -C $(MLXDIR)build
 
 clean:
@@ -72,9 +84,10 @@ clean:
 	@rm -f $(FRANS_SRC:.c=.o)
 
 fclean: clean
-	@make -C $(MLXDIR)build clean
 	@echo "Cleaning executable."
 	@rm -f $(NAME)
+	@echo "Cleaning MLX library."
+	@rm -rf $(MLXDIR)build
 
 re: fclean all
 

@@ -6,15 +6,16 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 12:53:42 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 16:15:44 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/19 22:14:27 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
 #include <stdlib.h>
+#include <math.h>
 #include "draw_line.h"
 #include "MLX42.h"
 #include "point.h"
+#include "put_pixel.h"
 
 static void	lh_init(t_linehelper *lh, t_point *p0, t_point *p1)
 {
@@ -40,7 +41,7 @@ void	draw_line(mlx_image_t *img, t_point p0, t_point p1, int color)
 	lh_init(&lh, &p0, &p1);
 	while (1)
 	{
-		mlx_put_pixel(img, lh.x, lh.y, color);
+		put_pixel(img, lh.x, lh.y, color);
 		if ((lh.x == p1.x) && (lh.y == p1.y))
 			break ;
 		lh.e2 = 2 * lh.err;

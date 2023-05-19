@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_rectangle.c                                   :+:    :+:            */
+/*   init_image.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/17 14:43:05 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/17 17:33:15 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/19 19:58:54 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/19 19:59:05 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MLX42.h"
-#include "rectangle.h"
+#include "stop.h"
 
-// Draws a rectangle on the image.
-void	draw_rect(mlx_image_t *image, t_rectangle rec, uint32_t color)
+mlx_image_t	*init_image(mlx_t *mlx, int width, int height)
 {
-	int32_t	i;
-	int32_t	j;
+	mlx_image_t	*image;
 
-	i = rec.x;
-	while (i < rec.width + rec.x)
-	{
-		j = rec.y;
-		while (j < rec.height + rec.y)
-		{
-			mlx_put_pixel(image, i, j, color);
-			j++;
-		}
-		i++;
-	}
+	image = mlx_new_image(mlx, width, height);
+	if (!image)
+		stop("Failed to initialize image");
+	return (image);
 }
