@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/19 12:11:00 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/19 16:58:38 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ $(NAME): $(OBJ)
 
 $(MLXLIB):
 	@echo "Compiling MLX library."
+	@cmake -S $(MLXDIR) -B $(MLXDIR)build
 	@make -C $(MLXDIR)build
 
 clean:
@@ -56,9 +57,10 @@ clean:
 	@rm -f $(FRANS_SRC:.c=.o)
 
 fclean: clean
-	@make -C $(MLXDIR)build clean
 	@echo "Cleaning executable."
 	@rm -f $(NAME)
+	@echo "Cleaning MLX library."
+	@rm -rf $(MLXDIR)build
 
 re: fclean all
 
