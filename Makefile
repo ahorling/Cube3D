@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/18 20:06:01 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/19 12:11:00 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC		= src/stop.c \
 			src/raycaster/utils/draw_rectangle.c \
 			src/raycaster/utils/fix_ang.c \
 			src/raycaster/utils/point.c \
+			src/raycaster/utils/put_pixel.c \
 			src/raycaster/utils/rectangle.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \

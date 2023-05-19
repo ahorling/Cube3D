@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_rectangle.c                                   :+:    :+:            */
+/*   put_pixel.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/17 14:43:05 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 14:25:22 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/19 12:10:32 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/19 12:10:43 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MLX42.h"
-#include "rectangle.h"
-#include "put_pixel.h"
+#ifndef PUT_PIXEL_H
+# define PUT_PIXEL_H
 
-// Draws a rectangle on the image.
-void	draw_rect(mlx_image_t *image, t_rectangle rec, uint32_t color)
-{
-	int32_t	i;
-	int32_t	j;
+# include "MLX42.h"
 
-	i = rec.x;
-	while (i < rec.width + rec.x)
-	{
-		j = rec.y;
-		while (j < rec.height + rec.y)
-		{
-			put_pixel(image, i, j, color);
-			j++;
-		}
-		i++;
-	}
-}
+void	put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
+
+#endif

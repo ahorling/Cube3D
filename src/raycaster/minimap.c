@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/17 14:34:56 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/18 17:09:00 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/19 12:31:27 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 static void	draw_player(t_raycaster rc)
 {
 	draw_rect(rc.screen,
-		rect(rc.px * rc.tile_size - 2, rc.py * rc.tile_size - 2, 5, 5), PURPLE);
+		rect(rc.px * rc.tile_size - (rc.tile_size / 16),
+			rc.py * rc.tile_size - (rc.tile_size / 16),
+			rc.tile_size / 8, rc.tile_size / 8), PURPLE);
 	draw_line(rc.screen, pt(rc.px * rc.tile_size, rc.py * rc.tile_size),
 		pt(rc.px * rc.tile_size + rc.pdx * (rc.tile_size / 2),
 			rc.py * rc.tile_size + rc.pdy * (rc.tile_size / 2)), RED);
