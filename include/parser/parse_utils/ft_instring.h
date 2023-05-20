@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_instring.h                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/20 20:46:32 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/20 20:47:32 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FT_INSTRING_H
+# define FT_INSTRING_H
 
-#include "info.h"
+#include <stdbool.h>
 
-t_info	*parse_input(int argc, char **argv);
+bool	ft_instring(char c, char *string);
 
 #endif

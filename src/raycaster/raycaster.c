@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 13:31:41 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 22:14:14 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/20 18:15:50 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,94 +112,7 @@ void	raycast(t_raycaster *rc)
 	rc->x = 0;
 	while (rc->x < rc->screen_width)
 	{
-		printf("px: %f, py: %f\n", rc->px, rc->py);
-		if (rc->map[(int)rc->py][(int)(rc->px + move_x)] == 0)
-			rc->px += move_x;
-		if (rc->map[(int)(rc->py + move_y)][(int)rc->px] == 0)
-			rc->py += move_y;
+		cast_single_ray(rc);
+		rc->x++;
 	}
-	if (mlx_is_key_down(mlx, MLX_KEY_S) || mlx_is_key_down(mlx, MLX_KEY_DOWN))
-	{
-		printf("px: %f, py: %f\n", rc->px, rc->py);
-		if (rc->map[(int)rc->py][(int)(rc->px - move_x)] == 0)
-			rc->px -= move_x;
-		if (rc->map[(int)(rc->py - move_y)][(int)rc->px] == 0)
-			rc->py -= move_y;
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_A) || mlx_is_key_down(mlx, MLX_KEY_LEFT))
-	{
-		double oldDirX = rc->pdx;
-		rc->pdx = rc->pdx * cos(-rotationSpeed) - rc->pdy * sin(-rotationSpeed);
-		rc->pdy = oldDirX * sin(-rotationSpeed) + rc->pdy * cos(-rotationSpeed);
-		double oldPlaneX = rc->cpx;
-		rc->cpx = rc->cpx * cos(-rotationSpeed) - rc->cpy * sin(-rotationSpeed);
-		rc->cpy = oldPlaneX * sin(-rotationSpeed) + rc->cpy * cos(-rotationSpeed);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_D) || mlx_is_key_down(mlx, MLX_KEY_RIGHT))
-	{
-		double oldDirX = rc->pdx;
-		rc->pdx = rc->pdx * cos(rotationSpeed) - rc->pdy * sin(rotationSpeed);
-		rc->pdy = oldDirX * sin(rotationSpeed) + rc->pdy * cos(rotationSpeed);
-		double oldPlaneX = rc->cpx;
-		rc->cpx = rc->cpx * cos(rotationSpeed) - rc->cpy * sin(rotationSpeed);
-		rc->cpy = oldPlaneX * sin(rotationSpeed) + rc->cpy * cos(rotationSpeed);
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_Q))
-	{
-		printf("px: %f, py: %f\n", rc->px, rc->py);
-		if (rc->map[(int)(rc->py - move_x)][(int)rc->px] == 0)
-			rc->py -= move_x;
-		if (rc->map[(int)rc->py][(int)(rc->px + move_y)] == 0)
-			rc->px += move_y;
-	}
-	if (mlx_is_key_down(mlx, MLX_KEY_E))
-	{
-		printf("px: %f, py: %f\n", rc->px, rc->py);
-		if (rc->map[(int)(rc->py + move_x)][(int)rc->px] == 0)
-			rc->py += move_x;
-		if (rc->map[(int)rc->py][(int)(rc->px - move_y)] == 0)
-			rc->px -= move_y;
-	}
-	draw(*rc);
-	draw_map(*rc);
-	draw_player(*rc);
-	printf("delta_time: %f\n", mlx->delta_time);
-}
-
-// -----------------------------------------------------------------------------
-
-int	main(int argc, char *argv[])
-{
-	t_raycaster	rc;
-
-	rc = init_raycaster();
-	if (!rc.mlx)
-	{
-		puts(mlx_strerror(mlx_errno));
-		return (EXIT_FAILURE);
-	}
-	texture[0] = mlx_load_png("mario2.png");
-	texture[1] = mlx_load_png("stone.png");
-	texture[2] = mlx_load_png("archer.png");
-	texture[3] = mlx_load_png("wt_logo.png");
-	if (!(rc.screen = mlx_new_image(rc.mlx, rc.screen_width, rc.screen_height)) || !(rays = mlx_new_image(rc.mlx, rc.map_width * rc.tile_size, rc.map_height * rc.tile_size)))
-	{
-		mlx_close_window(rc.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	draw(rc);
-	draw_map(rc);
-	draw_player(rc);
-	if (mlx_image_to_window(rc.mlx, rc.screen, 0, 0) == -1 || mlx_image_to_window(rc.mlx, rays, 0, 0) == -1)
-	{
-		mlx_close_window(rc.mlx);
-		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
-	}
-	mlx_loop_hook(rc.mlx, ft_hook, &rc);
-	mlx_loop(rc.mlx);
-	mlx_terminate(rc.mlx);
-	free_map(rc, rc.map);
-	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:27:43 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 21:57:22 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/20 22:10:14 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "errors.h"
 #include "info.h"
 #include "file_checker.h"
+#include "find_map.h"
 #include "ft_substr.h"
 #include "ft_strcmp.h"
 #include "ft_strlen.h"
@@ -38,6 +39,8 @@ static char	*find_texture(char **strings, char *id)
 			break;
 		i++;
 	}
+	if (strings[i] == '\0')
+		texture_error(1);
 	texture_path = ft_substr(strings[i], 3, ft_strlen(strings[i]));
 	if (check_dots(texture_path) == 1)
 		texture_error(2);
@@ -68,41 +71,52 @@ static bool	check_duplicates(char **strings, char *id, int len)
 	return (false);
 }
 
-static void	check_textures(char **strings)
+static void	check_garbage(char **strings, int map_start)
 {
-	if (check_duplicates(strings, "NO ", 3) == true)
-		texture_error(4);
-	if (check_duplicates(strings, "EA ", 3) == true)
-		texture_error(4);
-	if (check_duplicates(strings, "SO ", 3) == true)
-		texture_error(4);
-	if (check_duplicates(strings, "WE ", 3) == true)
-		texture_error(4);
-	if (check_duplicates(strings, "F ", 2) == true)
-		texture_error(4);
-	if (check_duplicates(strings, "C ", 2) == true)
-		texture_error(4);
-}
-
-static int	get_colour(char **strings, char *id)
-{
-	int	r;
-	int	g;
-	int	b;
-	int	i;
+	int		i;
+	bool	garbage;
 
 	i = 0;
-	while (strings[i])
+	garbage = false;
+	while (strings[i] && i < map_start)
 	{
-		if (ft_strncmp(id, strings[i], 2) == 0)
-			break;
+		while (!strings[i][0])
+			i++;
+		if (i >= map_start)
+			break ;
+		if (ft_strncmp(strings[i], "NO ", 3) != 0 \
+			&& ft_strncmp(strings[i], "EA ", 3) != 0 \
+			&& ft_strncmp(strings[i], "SO ", 3) != 0 \
+			&& ft_strncmp(strings[i], "WE ", 3) != 0 \
+			&& ft_strncmp(strings[i], "F ", 2) != 0 \
+			&& ft_strncmp(strings[i], "C ", 2) != 0)
+			garbage = true;
 		i++;
 	}
-	r = get_code(strings[i], 0);
-	g = get_code(strings[i], 1);
-	b = get_code(strings[i], 2);
-	i = assemble_colour(r, g, b);
-	exit(0);
+	if (garbage == true)
+		file_error(1);
+}
+
+static void	check_textures(char **strings)
+{
+	int	map_start;
+
+	map_start = find_map(strings);
+	if (map_start == -1)
+		map_error(1);
+	check_garbage(strings, map_start);
+	if (check_duplicates(strings, "NO", 2) == true)
+		texture_error(4);
+	if (check_duplicates(strings, "EA", 2) == true)
+		texture_error(4);
+	if (check_duplicates(strings, "SO", 2) == true)
+		texture_error(4);
+	if (check_duplicates(strings, "WE", 2) == true)
+		texture_error(4);
+	if (check_duplicates(strings, "F", 1) == true)
+		texture_error(4);
+	if (check_duplicates(strings, "C", 1) == true)
+		texture_error(4);
 }
 
 char	**get_textures(char **strings, t_info *info)
@@ -113,6 +127,6 @@ char	**get_textures(char **strings, t_info *info)
 	info->south_texture = find_texture(strings, "SO ");
 	info->west_texture = find_texture(strings, "WE ");
 	info->floor_color = get_colour(strings, "F ");
-	// info->ceiling_color = get_colout(strings, "C ");
+	info->ceiling_color = get_colour(strings, "C ");
 	exit (0);
 }

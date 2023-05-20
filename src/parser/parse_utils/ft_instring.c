@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_lines.h                                        :+:    :+:            */
+/*   ft_instring.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 21:30:16 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:04:37 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/20 20:44:40 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/20 21:18:45 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_LINES_H
-# define GET_LINES_H
+#include <stdbool.h>
 
-char	*get_file_content(char *path);
+#include <stdio.h>
 
-#endif
+bool	ft_instring(char c, char *string)
+{
+	int	i;
+
+	i = 0;
+	while (string[i])
+	{
+		if (string[i] == c)
+			return (true);
+		i++;
+	}
+	return (false);
+}

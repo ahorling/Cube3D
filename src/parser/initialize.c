@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 20:15:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 21:21:21 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/20 19:33:32 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "errors.h"
 #include "info.h"
 #include "ft_strdup.h"
-#include "get_lines.h"
 #include "parse_textures.h"
 #include "get_next_line.h"
 

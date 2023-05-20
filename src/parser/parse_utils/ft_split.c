@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 15:30:27 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 18:09:59 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/20 17:42:13 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 #include "ft_substr.h"
 #include "ft_strlen.h"
 
-static char	**freesplits(char **table, int tableindex)
-{
-	int	i;
+// static char	**freesplits(char **table, int tableindex)
+// {
+// 	int	i;
 
-	i = tableindex;
-	while (i >= 0)
-	{
-		free(table[i]);
-		i--;
-	}
-	free(table);
-	return (NULL);
-}
+// 	i = tableindex;
+// 	while (i >= 0)
+// 	{
+// 		free(table[i]);
+// 		i--;
+// 	}
+// 	free(table);
+// 	return (NULL);
+// }
 
 static int	numofsplits(char *s, char c)
 {
-	size_t	count;
-	size_t	i;
+	int	count;
+	int	i;
 
 	count = 0;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 16:59:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 21:47:43 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/20 21:58:51 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,33 @@
 
 void	map_error(int error)
 {
-	exit(error);
+	int	ERROR;
+
+	ERROR = STDERR_FILENO;
+	if (error == 1)
+	{
+		write(ERROR, "Map not provided or not last in the file\n", 31);
+		exit(30);
+	}
+	if (error == 2)
+	{
+	}
+	if (error == 3)
+	{
+	}
+}
+
+void	file_error(int error)
+{
+	int ERROR;
+
+	ERROR = STDERR_FILENO;
+	if (error == 1)
+	{
+		write(ERROR, "Found garbage in .cub file. Only include the map ", 50);
+		write(ERROR, "and the correct texture/colour flags\n", 37);
+		exit(8);
+	}
 }
 
 void	colour_error(int error)
@@ -27,11 +53,21 @@ void	colour_error(int error)
 	int	ERROR;
 
 	ERROR = STDERR_FILENO;
-
 	if (error == 1)
 	{
-		write(ERROR, "Non-numeric character found in colour scheme\n", 45);
+		write(ERROR, "Invalid setup of colour scheme\n", 31);
 		exit(24);
+	}
+	if (error == 2)
+	{
+		write(ERROR, "Invalid r, g or b value. values must be equal ", 47);
+		write(ERROR, "to or greater than 0, and less than 256\n", 41);
+		exit(25);
+	}
+	if (error == 3)
+	{
+		write(ERROR, "No valid floor or ceiling identifier\n", 37);
+		exit(26);
 	}
 }
 
@@ -41,10 +77,10 @@ void	texture_error(int error)
 	int	ERROR;
 
 	ERROR = STDERR_FILENO;
-
 	if (error == 1)
 	{
-		write(ERROR, "One or more texture files missing from .cub file\n", 49);
+		write(ERROR, "One or more texture file ", 26);
+		write(ERROR, "identifiers missing from .cub file\n", 35);
 		exit(20);
 	}
 	if (error == 2)
@@ -62,8 +98,8 @@ void	texture_error(int error)
 	}
 	if (error == 4)
 	{
-		write(ERROR, "Map file contains more than one textures ", 42);
-		write(ERROR, "for the same cardinal direction.\n", 33);
+		write(ERROR, "Map file contains more than one identifier ", 44);
+		write(ERROR, "for the same colour and/or textures.\n", 37);
 		exit(23);
 	}
 }

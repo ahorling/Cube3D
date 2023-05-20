@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/19 22:13:10 by ahorling      ########   odam.nl          #
+#    Updated: 2023/05/20 21:51:38 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,14 @@ SRC		= src/cub3d.c \
 			src/main.c \
 			src/parser/colours.c \
 			src/parser/errors.c \
+			src/parser/find_map.c \
 			src/parser/file_checker.c \
 			src/parser/initialize.c \
 			src/parser/parse_map.c \
 			src/parser/parse_textures.c \
 			src/parser/parser.c \
 			src/parser/parse_utils/ft_atoi.c \
+			src/parser/parse_utils/ft_instring.c \
 			src/parser/parse_utils/ft_memchr.c \
 			src/parser/parse_utils/ft_split.c \
 			src/parser/parse_utils/ft_strchr.c \
