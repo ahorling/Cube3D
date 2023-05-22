@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:11:06 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 21:53:08 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/22 21:00:59 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	valid_line(char *string)
 	int	i;
 
 	i = 0;
-	if (!string)
+	if (string[i] == 0)
 		return(false);
 	while (ft_instring(string[i], VALID_MAP_CHAR) == true)
 		i++;
@@ -55,10 +55,12 @@ int	find_map(char **strings)
 	start = i;
 	while(strings)
 	{
-		while (strings && valid_line(strings[i]) == true)
+		while (strings[i] && valid_line(strings[i]) == true)
 			i++;
 		if (strings[i] == NULL)
+		{
 			return (start);
+		}
 		i++;
 		i = possible_start(strings, i);
 		start = i;

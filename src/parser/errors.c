@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 16:59:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 21:58:51 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/22 21:43:11 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,18 @@ void	map_error(int error)
 	ERROR = STDERR_FILENO;
 	if (error == 1)
 	{
-		write(ERROR, "Map not provided or not last in the file\n", 31);
+		write(ERROR, "Map not provided or not last in the file\n", 41);
 		exit(30);
 	}
 	if (error == 2)
 	{
+		write(ERROR, "Map contains too many player identifiers\n", 41);
+		exit(31);
 	}
 	if (error == 3)
 	{
+		write(ERROR, "No player identifier found in provided map\n", 43);
+		exit(32);
 	}
 }
 
@@ -42,8 +46,8 @@ void	file_error(int error)
 	ERROR = STDERR_FILENO;
 	if (error == 1)
 	{
-		write(ERROR, "Found garbage in .cub file. Only include the map ", 50);
-		write(ERROR, "and the correct texture/colour flags\n", 37);
+		write(ERROR, "Found garbage in .cub file. Only include a valid", 49);
+		write(ERROR, " map and the correct texture/colour flags\n", 42);
 		exit(8);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:27:43 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 22:10:14 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/22 21:51:28 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ static void	check_textures(char **strings)
 	map_start = find_map(strings);
 	if (map_start == -1)
 		map_error(1);
+	printf("map starts on line: %d\n", map_start);
 	check_garbage(strings, map_start);
 	if (check_duplicates(strings, "NO", 2) == true)
 		texture_error(4);
@@ -119,7 +120,7 @@ static void	check_textures(char **strings)
 		texture_error(4);
 }
 
-char	**get_textures(char **strings, t_info *info)
+void	get_textures(char **strings, t_info *info)
 {
 	check_textures(strings);
 	info->north_texture = find_texture(strings, "NO ");
@@ -128,5 +129,4 @@ char	**get_textures(char **strings, t_info *info)
 	info->west_texture = find_texture(strings, "WE ");
 	info->floor_color = get_colour(strings, "F ");
 	info->ceiling_color = get_colour(strings, "C ");
-	exit (0);
 }
