@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/19 20:11:34 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/23 15:57:22 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCLUDE	= -I include \
 		  -I include/raycaster/utils \
 		  -I MLX42/include/MLX42
 LINKS	= 
-CFLAGS	= -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -O2 #-g -fsanitize=address
 MLXFLAGS = -lglfw -L$(shell brew --prefix glfw)/lib -framework Cocoa -framework OpenGL -framework IOKit
 MLXDIR = MLX42/
 MLXLIB = $(MLXDIR)build/libmlx42.a

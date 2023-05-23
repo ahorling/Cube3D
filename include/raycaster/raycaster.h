@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/17 13:52:54 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 20:19:13 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/23 15:09:41 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_raycaster
 	int				tex_num;
 	int				draw_start;
 	int				draw_end;
-	double			line_height;
+	int				line_height;
 	double			tex_pos;
 	double			tex_step;
 	double			wall_x;

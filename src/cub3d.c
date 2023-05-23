@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:11:43 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 20:18:43 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/23 15:44:40 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static t_raycaster	init_raycaster(void)
 	rc.pdy = 0;
 	rc.rdx = 0;
 	rc.rdy = 0;
-	rc.mspeed = 0.05;
+	rc.mspeed = 0.04999;
 	rc.rspeed = 0.05;
 	rc.pitch = 0;
 	rc.mlx = mlx_init(rc.screen_width, rc.screen_height, "cub3D", true);
@@ -164,6 +164,7 @@ void	game_loop(void *param)
 	movement(rc);
 	raycast(rc);
 	draw_map(*rc);
+	printf("delta time: %f\n", rc->mlx->delta_time);
 }
 
 int	main(int argc, char *argv[])
@@ -173,7 +174,9 @@ int	main(int argc, char *argv[])
 	(void)argc;
 	(void)argv;
 	rc = init_raycaster();
-	rc.textures[0] = load_texture("dnd_qr.png");
+	rc.textures[0] = load_texture("robe_of_agony.png");
+	printf("%d\n", rc.textures[0]->height);
+	printf("%d\n", rc.textures[0]->width);
 	rc.textures[1] = load_texture("stone.png");
 	rc.textures[2] = load_texture("stone_bricks.png");
 	rc.textures[3] = load_texture("wt_logo.png");

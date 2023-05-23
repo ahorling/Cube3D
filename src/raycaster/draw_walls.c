@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:05:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 20:10:17 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/23 15:38:32 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,24 @@ void	prepare_for_texture(t_raycaster *rc)
 void	draw_textured_walls(t_raycaster *rc)
 {
 	rc->y = 0;
+	while (rc->y < rc->draw_start)
+	{
+		put_pixel(rc->screen, rc->x, rc->y, TRANSPARENT);
+		rc->y++;
+	}
+	while (rc->y < rc->draw_end)
+	{
+		rc->tex_y = (int)rc->tex_pos;
+		rc->tex_pos += rc->tex_step;
+		rc->color = correct_color(
+				&rc->tex->pixels[(rc->tex->height * rc->tex_y
+					+ (rc->tex->width - rc->tex_x - 1)) * 4]);
+		put_pixel(rc->screen, rc->x, rc->y, rc->color);
+		rc->y++;
+	}
 	while (rc->y < rc->screen_height)
 	{
-		if (rc->y >= rc->draw_start && rc->y < rc->draw_end)
-		{
-			rc->tex_y = (int)rc->tex_pos;
-			rc->tex_pos += rc->tex_step;
-			rc->color = correct_color(
-					&rc->tex->pixels[(rc->tex->height * rc->tex_y
-						+ (rc->tex->width - rc->tex_x - 1)) * 4]);
-			put_pixel(rc->screen, rc->x, rc->y, rc->color);
-		}
-		else
-			put_pixel(rc->screen, rc->x, rc->y, TRANSPARENT);
+		put_pixel(rc->screen, rc->x, rc->y, TRANSPARENT);
 		rc->y++;
 	}
 }
