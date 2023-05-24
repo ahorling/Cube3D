@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:13:25 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:36:21 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 19:28:26 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 
+/*check if there is at least one '.' denoting a file extension*/
 int	check_dots(char *string)
 {
 	int	dots;
@@ -25,7 +26,7 @@ int	check_dots(char *string)
 
 	i = 0;
 	dots = 0;
-	while(string[i] != '\0')
+	while (string[i] != '\0')
 	{
 		if (string[i] == '.')
 			dots++;
@@ -36,6 +37,8 @@ int	check_dots(char *string)
 	return (1);
 }
 
+/*check if provided file exists, if it has
+a file extensioni, and if it is a .cub file*/
 void	check_file(char *path)
 {
 	char	*temp;

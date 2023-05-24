@@ -6,12 +6,16 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 16:59:51 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 21:59:02 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 19:24:04 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
+
+# ifndef ERROR
+# define ERROR STDERR_FILENO
+# endif
 
 void	file_error(int error);
 void	map_error(int error);

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:27:43 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:25:33 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 19:33:52 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*find the texture file associated with the given identifier*/
 static char	*find_texture(char **strings, char *id)
 {
 	int		start;
@@ -36,7 +37,7 @@ static char	*find_texture(char **strings, char *id)
 	while (strings[i])
 	{
 		if (ft_strncmp(id, strings[i], 3) == 0)
-			break;
+			break ;
 		i++;
 	}
 	if (strings[i] == '\0')
@@ -51,6 +52,7 @@ static char	*find_texture(char **strings, char *id)
 	return (texture_path);
 }
 
+/*check if there are more than one identifiers for textures*/
 static bool	check_duplicates(char **strings, char *id, int len)
 {
 	int		i;
@@ -71,6 +73,7 @@ static bool	check_duplicates(char **strings, char *id, int len)
 	return (false);
 }
 
+/*check to see if there is any non-authorized values in the file*/
 static void	check_garbage(char **strings, int map_start)
 {
 	int		i;
@@ -97,6 +100,8 @@ static void	check_garbage(char **strings, int map_start)
 		file_error(1);
 }
 
+/*find the start of the map, and then check to make sure the
+rest of the file follows the proper directions*/
 static void	check_textures(char **strings)
 {
 	int	map_start;
@@ -104,7 +109,6 @@ static void	check_textures(char **strings)
 	map_start = find_map(strings);
 	if (map_start == -1)
 		map_error(1);
-	printf("map starts on line: %d\n", map_start);
 	check_garbage(strings, map_start);
 	if (check_duplicates(strings, "NO", 2) == true)
 		texture_error(4);
@@ -120,6 +124,7 @@ static void	check_textures(char **strings)
 		texture_error(4);
 }
 
+/*fill the info struct with the correct texture information*/
 void	get_textures(char **strings, t_info *info)
 {
 	check_textures(strings);
@@ -128,6 +133,5 @@ void	get_textures(char **strings, t_info *info)
 	info->south_texture = find_texture(strings, "SO ");
 	info->west_texture = find_texture(strings, "WE ");
 	info->floor_color = get_colour(strings, "F ");
-	printf("floor colour: %x\n", info->floor_color);
 	info->ceiling_color = get_colour(strings, "C ");
 }

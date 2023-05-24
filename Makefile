@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/24 17:22:11 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/24 19:45:07 by ahorling      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,11 @@ SRC		= src/main.c \
 			src/raycaster/draw_walls.c \
 			src/parser/colours.c \
 			src/parser/errors.c \
+			src/parser/errors2.c \
 			src/parser/find_map.c \
 			src/parser/file_checker.c \
 			src/parser/initialize.c \
+			src/parser/map_dimensions.c \
 			src/parser/parse_map.c \
 			src/parser/parse_textures.c \
 			src/parser/parser.c \

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 20:15:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:31:35 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 19:54:46 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 #include <stdio.h>
 
-int		count_lines(char *path)
+int	count_lines(char *path)
 {
 	char	*line;
 	int		fd;
@@ -66,8 +66,6 @@ char	**get_contents(char *path)
 	while (ret != 0)
 	{
 		ret = (get_next_line(fd, &line));
-		if (ret == -1)
-			read_error();
 		contents[count] = ft_strdup(line);
 		count++;
 		free(line);
@@ -77,24 +75,15 @@ char	**get_contents(char *path)
 	return (contents);
 }
 
-t_info	*initialize_info(char *path)
+void	initialize_info(t_info *info, char *path)
 {
-	t_info	*info;
 	char	**filecontents;
 	int		i;
 
 	i = 0;
-	info = malloc(sizeof(info));
-	if (!info)
-		malloc_error("initialize_info");
 	filecontents = get_contents(path);
-	// while (filecontents[i])
-	// {
-	// 	printf("%s\n", filecontents[i]);
-	// 	i++;
-	// }
 	get_textures(filecontents, info);
 	get_map(info, filecontents);
-	// info->map = get_map(filecontents);
-	return (info);
+	printf("1\n");
+	free(filecontents);
 }

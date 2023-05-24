@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 21:30:08 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:31:38 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 19:24:30 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 #include "ft_substr.h"
 #include "ft_strncmp.h"
 
-#include <stdio.h>
-
+/*Checks to see if the provided colour scheme is valid*/
 void	colour_checker(char *string)
 {
 	int	i;
@@ -26,7 +25,7 @@ void	colour_checker(char *string)
 
 	i = 2;
 	count = 0;
-	while(string[i])
+	while (string[i])
 	{
 		if (string[i] == ',')
 			count++;
@@ -40,15 +39,16 @@ void	colour_checker(char *string)
 		colour_error(1);
 }
 
+/*Convert three ints into a single hex code*/
 int	assemble_colour(int r, int g, int b)
 {
 	int	hex;
 
 	hex = ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) + (0xff);
-	// printf("%x\n", hex);
 	return (hex);
 }
 
+/*Grab 3 ints from the provided rgb code*/
 int	get_code(char *string, int skip)
 {
 	int		start;
@@ -72,11 +72,11 @@ int	get_code(char *string, int skip)
 	ret = (int)ft_atoi(temp);
 	if (ret > 255)
 		colour_error(3);
-	// printf("%d\n", ret);
 	free(temp);
 	return (ret);
 }
 
+/*find, check and convert the provided RGB value into a usable single hex*/
 int	get_colour(char **strings, char *id)
 {
 	int	r;
@@ -88,7 +88,7 @@ int	get_colour(char **strings, char *id)
 	while (strings[i])
 	{
 		if (ft_strncmp(id, strings[i], 2) == 0)
-			break;
+			break ;
 		i++;
 	}
 	if (strings[i] == '\0')

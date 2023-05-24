@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/10 16:19:23 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:26:45 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 18:55:55 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int	main(int argc, char **argv)
 	info = parse_input(argc, argv);
 	printf("PARSING DONE: %x\n", info->floor_color);
 	cub3d(info);
+	free_info(info);
 	exit(0);
 }

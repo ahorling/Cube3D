@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:11:43 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:35:23 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 18:35:05 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	cub3d(t_info *info)
 	printf("test1\n");
 	rc = init_raycaster(info);
 	printf("test2\n");
-	rc.textures[0] = load_texture("robe_of_agony.png");
+	rc.textures[0] = load_texture("dnd_qr.png");
 	rc.textures[1] = load_texture("stone.png");
 	rc.textures[2] = load_texture("stone_bricks.png");
 	rc.textures[3] = load_texture("wt_logo.png");

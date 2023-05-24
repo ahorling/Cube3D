@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize.h                                       :+:    :+:            */
+/*   map_dimensions.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 20:16:44 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:56:11 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/24 19:46:50 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/24 19:52:24 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INITIALIZE_H
-# define INITIALIZE_H
+#ifndef MAP_DIMENSIONS_H
+# define MAP_DIMENSIONS_H
 
 # include "info.h"
 
-void	initialize_info(t_info *info, char *path);
+void	get_dimensions(t_info *info, char **map, int mapstart);
+void	set_dimensions(t_info *info, char **map, int mapstart);
 
 #endif
