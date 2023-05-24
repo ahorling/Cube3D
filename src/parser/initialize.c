@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 20:15:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 21:04:16 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 21:13:32 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@
 #include "get_next_line.h"
 #include "parse_textures.h"
 #include "parse_map.h"
-
-
-#include <stdio.h>
-
-
-
 
 /*count how many lines there are in the provided .cub file
 so that we know how much memory we need to allocate later.*/
