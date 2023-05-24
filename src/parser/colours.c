@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 21:30:08 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:57:27 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 22:11:20 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	colour_checker(char *string)
 	count = 0;
 	while (string[i])
 	{
+		while (string[i] == ' ')
+		i++;
 		if (string[i] == ',')
 			count++;
 		if (string[i] == '-')
@@ -56,8 +58,10 @@ int	get_code(char *string, int skip)
 	int		ret;
 	char	*temp;
 
-	start = 2;
+	start = 1;
 	end = start;
+	while (string[start] == ' ')
+		start++;
 	while (string[end] != ',' && string[end])
 	{
 		end++;
@@ -87,7 +91,7 @@ int	get_colour(char **strings, char *id)
 	i = 0;
 	while (strings[i])
 	{
-		if (ft_strncmp(id, strings[i], 2) == 0)
+		if (ft_strncmp(id, strings[i], 1) == 0)
 			break ;
 		i++;
 	}

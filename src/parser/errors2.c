@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/24 19:25:13 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:46:42 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 21:49:52 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	map_error(int error)
 {
+	write(ERROR, "Error\n", 6);
 	if (error == 1)
 	{
 		write(ERROR, "Map not provided or not last in the file\n", 41);
@@ -35,6 +36,7 @@ void	map_error(int error)
 
 void	file_error(int error)
 {
+	write(ERROR, "Error\n", 6);
 	if (error == 1)
 	{
 		write(ERROR, "Found garbage in .cub file. Only include a valid", 49);
@@ -45,6 +47,7 @@ void	file_error(int error)
 
 void	colour_error(int error)
 {
+	write(ERROR, "Error\n", 6);
 	if (error == 1)
 	{
 		write(ERROR, "Invalid setup of colour scheme\n", 31);

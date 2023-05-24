@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 16:59:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 19:26:26 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 22:13:09 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 void	texture_error(int error)
 {
+	write(ERROR, "Error\n", 6);
 	if (error == 1)
 	{
 		write(ERROR, "One or more texture file ", 26);
@@ -34,8 +35,7 @@ void	texture_error(int error)
 	if (error == 3)
 	{
 		write(ERROR, "One or more texture files have ", 31);
-		write(ERROR, " an incorrect file extension. ", 30);
-		write(ERROR, "Please make sure you are providing .png files.\n", 47);
+		write(ERROR, " an incorrect file extension.\n", 30);
 		exit(22);
 	}
 	if (error == 4)
@@ -48,6 +48,7 @@ void	texture_error(int error)
 
 void	argument_error(void)
 {
+	write(ERROR, "Error\n", 6);
 	write(ERROR, "Invalid number of arguments. ", 30);
 	write(ERROR, "Please make sure you are running the program in the ", 53);
 	write(ERROR, "following way: ./cub3D [a file ending in .cub]\n", 47);
@@ -56,12 +57,14 @@ void	argument_error(void)
 
 void	read_error(void)
 {
+	write(ERROR, "Error\n", 6);
 	write(ERROR, "Failed to read from file\n", 26);
 	exit(6);
 }
 
 void	file_path_error(int error)
 {
+	write(ERROR, "Error\n", 6);
 	if (error == -1)
 	{
 		write(ERROR, "Provided file does not have a file extension.\n", 46);
@@ -90,6 +93,7 @@ void	malloc_error(char *string)
 	int	i;
 
 	i = ft_strlen(string);
+	write(ERROR, "Error\n", 6);
 	write(ERROR, "Memory allocation failure occured in function: ", 48);
 	write(ERROR, &string, i);
 	write(ERROR, "\n", 1);
