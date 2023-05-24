@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 20:15:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:35:19 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 21:04:16 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@
 #include "errors.h"
 #include "info.h"
 #include "ft_strdup.h"
+#include "get_next_line.h"
 #include "parse_textures.h"
 #include "parse_map.h"
-#include "get_next_line.h"
+
 
 #include <stdio.h>
 
+
+
+
+/*count how many lines there are in the provided .cub file
+so that we know how much memory we need to allocate later.*/
 int	count_lines(char *path)
 {
 	char	*line;
@@ -46,6 +52,7 @@ int	count_lines(char *path)
 	return (count);
 }
 
+/*pull the lines from the provided .cub file into a 2D array*/
 char	**get_contents(char *path)
 {
 	char	*line;
@@ -75,6 +82,7 @@ char	**get_contents(char *path)
 	return (contents);
 }
 
+/*fill the info struct with the proper values. bad name I know*/
 void	initialize_info(t_info *info, char *path)
 {
 	char	**filecontents;

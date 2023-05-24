@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:07:32 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 19:37:03 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 21:03:26 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "file_checker.h"
 #include "info.h"
 #include "initialize.h"
+
+
+#include <stdio.h>
 
 /*set the info struct to null in case of 
 memory fuckery*/

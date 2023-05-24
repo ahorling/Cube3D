@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/24 19:25:13 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:13:16 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 20:46:42 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ void	colour_error(int error)
 	{
 		write(ERROR, "No valid floor or ceiling identifier\n", 37);
 		exit(26);
+	}
+	if (error == 4)
+	{
+		write(ERROR, "given colour code contains R, G or B value", 43);
+		write(ERROR, " greater than 255 or below 0\n", 29);
+		exit(27);
 	}
 }

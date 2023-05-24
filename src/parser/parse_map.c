@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/22 21:05:00 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:33:08 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 21:07:27 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static bool	check_valid(char **map, int i, int j)
 		return (false);
 	while (y <= i + 1)
 	{
+		if (!map[y])
+			return (false);
 		while (x <= j + 1)
 		{
 			if (!map[y][x] || (map[y][x] != '0' && map[y][x] != '1'))
