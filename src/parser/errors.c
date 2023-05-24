@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 16:59:12 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/22 21:43:11 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 14:48:11 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	map_error(int error)
 	{
 		write(ERROR, "No player identifier found in provided map\n", 43);
 		exit(32);
+	}
+	if (error == 4)
+	{
+		write(ERROR, "Provided map has invalid play area\n", 35);
+		exit(33);
 	}
 }
 

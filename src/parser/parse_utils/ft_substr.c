@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 15:31:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 17:43:01 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 15:52:28 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*ft_substr(char *s, int start, int len)
 	char	*substr;
 	char	*string;
 
-	i = 0;
-	string = (char *)s;
-	if (s == NULL)
+	if (!s)
 		return (NULL);
+	i = 0;
+	string = s;
 	if (ft_strlen(string) < start)
 		len = 0;
 	else if ((ft_strlen(string) + start) < len)

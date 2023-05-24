@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:00:21 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/19 20:06:29 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/24 15:51:56 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strdup(const char *str)
 		i++;
 	}
 	i = 0;
-	dupe = (char *)malloc((leng + 1) * sizeof(char));
+	dupe = malloc((leng + 1) * sizeof(char));
 	if (dupe == NULL)
 		malloc_error("ft_strdup");
 	while (str[i] != '\0')
