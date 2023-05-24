@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_atoi.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 21:52:07 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 21:52:09 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FT_ATOI_H
+# define FT_ATOI_H
 
-#include "info.h"
+# include <stdlib.h>
 
-t_info	*parse_input(int argc, char **argv);
+size_t	ft_atoi(const char *str);
 
 #endif

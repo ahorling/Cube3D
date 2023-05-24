@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:33:10 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/19 20:25:57 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 17:33:19 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	move_player(t_raycaster *rc, double move_x, double move_y)
 		rc->py += move_y;
 }
 
-static void	rotate_player(t_raycaster *rc, double rot)
+void	rotate_player(t_raycaster *rc, double rot)
 {
 	double	old_dir_x;
 	double	old_plane_x;

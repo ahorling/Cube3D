@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   file_checker.h                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/18 17:11:11 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/18 18:00:24 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FILE_CHECKER_H
+# define FILE_CHECKER_H
 
-#include "info.h"
-
-t_info	*parse_input(int argc, char **argv);
+int		check_dots(char *string);
+void	check_file(char *path);
 
 #endif

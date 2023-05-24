@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_strdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 20:00:21 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/24 15:51:56 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include <stdlib.h>
+#include "errors.h"
 
-#include "info.h"
+char	*ft_strdup(const char *str)
+{
+	int		i;
+	int		leng;
+	char	*dupe;
 
-t_info	*parse_input(int argc, char **argv);
-
-#endif
+	i = 0;
+	leng = 0;
+	while (str[i] != '\0')
+	{
+		leng++;
+		i++;
+	}
+	i = 0;
+	dupe = malloc((leng + 1) * sizeof(char));
+	if (dupe == NULL)
+		malloc_error("ft_strdup");
+	while (str[i] != '\0')
+	{
+		dupe[i] = str[i];
+		i++;
+	}
+	dupe[i] = '\0';
+	return (dupe);
+}

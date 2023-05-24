@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_strncmp.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 20:27:03 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 20:27:46 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FT_STRNCMP_H
+# define FT_STRNCMP_H
 
-#include "info.h"
-
-t_info	*parse_input(int argc, char **argv);
+int	ft_strncmp(const char *s1, const char *s2, unsigned int n);
 
 #endif

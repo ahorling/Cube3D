@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   colours.h                                          :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 21:49:18 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/20 19:19:37 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef COLOURS_H
+# define COLOURS_H
 
-#include "info.h"
-
-t_info	*parse_input(int argc, char **argv);
+void	colour_checker(char *string);
+int		assemble_colour(int r, int g, int b);
+int		get_code(char *string, int skip);
+int		get_colour(char **strings, char *id);
 
 #endif

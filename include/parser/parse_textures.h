@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   parse_textures.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 17:28:30 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/22 22:15:44 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSE_TEXTURES_H
+# define PARSE_TEXTURES_H
 
-#include "info.h"
+#include <stdbool.h>
 
-t_info	*parse_input(int argc, char **argv);
+void	get_textures(char **string, t_info *info);
 
 #endif

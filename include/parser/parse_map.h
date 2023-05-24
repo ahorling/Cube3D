@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   parse_map.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 17:32:23 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/22 21:47:31 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef PARSE_MAP_H
+# define PARSE_MAP_H
 
-#include "info.h"
+# include "info.h"
 
-t_info	*parse_input(int argc, char **argv);
+void	get_map(t_info *info, char **filecontents);
 
 #endif

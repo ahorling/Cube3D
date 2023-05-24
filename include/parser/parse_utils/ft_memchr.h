@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_memchr.h                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 16:11:43 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/19 16:12:23 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FT_MEMCHR_H
+# define FT_MEMCHR_H
 
-#include "info.h"
+# include <unistd.h>
 
-t_info	*parse_input(int argc, char **argv);
+void	*ft_memchr(const void *str, int ch, size_t size);
 
 #endif

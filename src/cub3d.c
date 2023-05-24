@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:11:43 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:44:40 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/24 17:35:23 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,75 +33,6 @@
 #include "rectangle.h"
 #include "stop.h"
 
-int MAPX = 24;
-int MAPY = 24;
-
-// int worldMap[8][8]=
-// {
-// 	{1,1,1,1,1,1,1,1},
-// 	{1,0,1,0,0,0,0,1},
-// 	{1,0,1,0,0,0,0,1},
-// 	{1,0,1,0,0,0,0,1},
-// 	{1,0,0,0,0,0,0,1},
-// 	{1,0,0,0,0,1,0,1},
-// 	{1,0,0,0,0,0,0,1},
-// 	{1,1,1,1,1,1,1,1}
-// };
-
-int worldMap[24][24]=
-{
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1},
-	{1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,1,1,0,1,1,0,0,0,0,1,0,1,0,1,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-};
-
-int	**convert_worldmap(void)
-{
-	int	**map;
-	int	i;
-	int	j;
-
-	map = malloc(sizeof(int *) * MAPX);
-	if (!map)
-		return (NULL);
-	i = 0;
-	while (i < MAPX)
-	{
-		map[i] = malloc(sizeof(int) * MAPY);
-		if (!map[i])
-			return (NULL);
-		j = 0;
-		while (j < MAPY)
-		{
-			map[i][j] = worldMap[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (map);
-}
-
 void	free_map(t_raycaster rc, int **map)
 {
 	int	i;
@@ -115,22 +46,28 @@ void	free_map(t_raycaster rc, int **map)
 	free(map);
 }
 
-static t_raycaster	init_raycaster(void)
+static t_raycaster	init_raycaster(t_info *info)
 {
 	t_raycaster	rc;
 
-	rc.floor_color = DARKGRAY;
-	rc.ceiling_color = SKYBLUE;
+	printf("1: %x\n", info->floor_color);
+	rc.floor_color = info->floor_color;
+	printf("2\n");
+	rc.ceiling_color = info->ceiling_color;
 	rc.screen_width = 1600;
 	rc.screen_height = 900;
-	rc.map_width = MAPX;
-	rc.map_height = MAPY;
-	rc.map = convert_worldmap();
+	rc.map_width = info->map_width;
+	rc.map_height = info->map_height;
+	printf("testMAP\n");
+	rc.map = info->map;
+	printf("testAFTER\n");
 	rc.tile_size = rc.screen_height / (rc.map_height * 3);
 	rc.cpx = 0;
 	rc.cpy = 0.66;
-	rc.px = 4;
-	rc.py = 2;
+	printf("testPlayerPos\n");
+	rc.px = (double)info->player_x;
+	rc.py = (double)info->player_y;
+	printf("testAFTER\n");
 	rc.pdx = 1;
 	rc.pdy = 0;
 	rc.rdx = 0;
@@ -141,6 +78,7 @@ static t_raycaster	init_raycaster(void)
 	rc.mlx = mlx_init(rc.screen_width, rc.screen_height, "cub3D", true);
 	if (!rc.mlx)
 		stop("Failed to initialize mlx");
+	rotate_player(&rc, deg_to_rad(-90));
 	return (rc);
 }
 
@@ -167,26 +105,30 @@ void	game_loop(void *param)
 	printf("delta time: %f\n", rc->mlx->delta_time);
 }
 
-int	main(int argc, char *argv[])
+int	cub3d(t_info *info)
 {
 	t_raycaster	rc;
 
-	(void)argc;
-	(void)argv;
-	rc = init_raycaster();
+	printf("test1\n");
+	rc = init_raycaster(info);
+	printf("test2\n");
 	rc.textures[0] = load_texture("robe_of_agony.png");
-	printf("%d\n", rc.textures[0]->height);
-	printf("%d\n", rc.textures[0]->width);
 	rc.textures[1] = load_texture("stone.png");
 	rc.textures[2] = load_texture("stone_bricks.png");
 	rc.textures[3] = load_texture("wt_logo.png");
+	printf("test3\n");
 	rc.background = init_image(rc.mlx, rc.screen_width, rc.screen_height);
 	rc.screen = init_image(rc.mlx, rc.screen_width, rc.screen_height);
+	printf("test4\n");
 	set_background(rc);
+	printf("test5\n");
 	raycast(&rc);
+	printf("test6\n");
 	draw_map(rc);
+	printf("test7\n");
 	image_to_window(rc.mlx, rc.background, 0, 0);
 	image_to_window(rc.mlx, rc.screen, 0, 0);
+	printf("test8\n");
 	mlx_loop_hook(rc.mlx, game_loop, &rc);
 	mlx_loop(rc.mlx);
 	mlx_terminate(rc.mlx);

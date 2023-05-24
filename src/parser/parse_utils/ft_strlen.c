@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   ft_strlen.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/18 20:20:07 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/18 20:20:53 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+int	ft_strlen(char *string)
+{
+	int	i;
 
-#include "info.h"
-
-t_info	*parse_input(int argc, char **argv);
-
-#endif
+	i = 0;
+	while (string[i])
+		i++;
+	return (i);
+}

@@ -6,14 +6,37 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/23 15:57:22 by fholwerd      ########   odam.nl          #
+#    Updated: 2023/05/24 17:22:11 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
-SRC		= src/cub3d.c \
+SRC		= src/main.c \
+			src/cub3d.c \
 			src/stop.c \
 			src/raycaster/draw_walls.c \
+			src/parser/colours.c \
+			src/parser/errors.c \
+			src/parser/find_map.c \
+			src/parser/file_checker.c \
+			src/parser/initialize.c \
+			src/parser/parse_map.c \
+			src/parser/parse_textures.c \
+			src/parser/parser.c \
+			src/parser/parse_utils/ft_atoi.c \
+			src/parser/parse_utils/ft_instring.c \
+			src/parser/parse_utils/ft_memchr.c \
+			src/parser/parse_utils/ft_split.c \
+			src/parser/parse_utils/ft_strchr.c \
+			src/parser/parse_utils/ft_strcmp.c \
+			src/parser/parse_utils/ft_strdup.c \
+			src/parser/parse_utils/ft_strjoin.c \
+			src/parser/parse_utils/ft_strlen.c \
+			src/parser/parse_utils/ft_strncmp.c \
+			src/parser/parse_utils/ft_strrchr.c \
+			src/parser/parse_utils/ft_substr.c \
+			src/parser/parse_utils/get_next_line.c \
+			src/parser/parse_utils/get_next_line_utils.c \
 			src/raycaster/minimap.c \
 			src/raycaster/movement.c \
 			src/raycaster/raycaster.c \
@@ -31,6 +54,7 @@ SRC		= src/cub3d.c \
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
 		  -I include/parser \
+		  -I include/parser/parse_utils \
 		  -I include/raycaster \
 		  -I include/raycaster/utils \
 		  -I MLX42/include/MLX42

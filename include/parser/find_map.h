@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   find_map.h                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/19 17:32:23 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/20 21:51:19 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef FIND_MAP_H
+# define FIND_MAP_H
 
-#include "info.h"
+# include <stdbool.h>
 
-t_info	*parse_input(int argc, char **argv);
+# ifndef VALID_MAP_CHAR
+# define VALID_MAP_CHAR	"012NSWE' '"
+# endif
+
+
+bool	valid_line(char *string);
+int		find_map(char **strings);
 
 #endif

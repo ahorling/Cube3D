@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   initialize.h                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/18 20:16:44 by ahorling      #+#    #+#                 */
+/*   Updated: 2023/05/18 20:18:18 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef INITIALIZE_H
+# define INITIALIZE_H
 
-#include "info.h"
+# include "info.h"
 
-t_info	*parse_input(int argc, char **argv);
+t_info	*initialize_info(char *path);
 
 #endif

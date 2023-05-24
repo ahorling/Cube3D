@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parser.h                                           :+:    :+:            */
+/*   cub3d.h                                            :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
+/*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/18 18:29:46 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/20 18:33:20 by ahorling      ########   odam.nl         */
+/*   Created: 2023/05/24 17:10:27 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/24 17:10:42 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include "info.h"
+# include "info.h"
 
-t_info	*parse_input(int argc, char **argv);
+int	cub3d(t_info *info);
 
 #endif
