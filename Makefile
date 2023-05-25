@@ -6,7 +6,7 @@
 #    By: fholwerd <fholwerd@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/11/08 15:59:07 by fholwerd      #+#    #+#                  #
-#    Updated: 2023/05/24 20:35:14 by ahorling      ########   odam.nl          #
+#    Updated: 2023/05/25 20:10:28 by fholwerd      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME	= cub3D
 SRC		= src/main.c \
 			src/cub3d.c \
 			src/stop.c \
-			src/raycaster/draw_walls.c \
 			src/parser/colours.c \
 			src/parser/errors.c \
 			src/parser/errors2.c \
@@ -39,6 +38,8 @@ SRC		= src/main.c \
 			src/parser/parse_utils/ft_substr.c \
 			src/parser/parse_utils/get_next_line.c \
 			src/parser/parse_utils/get_next_line_utils.c \
+			src/raycaster/draw_walls.c \
+			src/raycaster/init_raycaster.c \
 			src/raycaster/minimap.c \
 			src/raycaster/movement.c \
 			src/raycaster/raycaster.c \
@@ -52,7 +53,8 @@ SRC		= src/main.c \
 			src/raycaster/utils/load_texture.c \
 			src/raycaster/utils/point.c \
 			src/raycaster/utils/put_pixel.c \
-			src/raycaster/utils/rectangle.c
+			src/raycaster/utils/rectangle.c \
+			src/raycaster/utils/set_background.c
 OBJ		= $(SRC:.c=.o)
 INCLUDE	= -I include \
 		  -I include/parser \

@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/22 21:05:00 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 21:07:27 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/25 15:53:23 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	find_player(t_info *info, char **map, int start)
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' \
 				|| map[i][j] == 'W')
 			{
-				map[i][j] = '0';
 				j = record_player(info, map, i, j);
+				map[i][j - 1] = '0';
 				count++;
 			}
 			j++;

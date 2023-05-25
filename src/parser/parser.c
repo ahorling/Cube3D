@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:07:32 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 21:13:37 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/25 19:44:20 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,26 @@ static void	set_null(t_info *info)
 	info->map = NULL;
 }
 
+static void	free_map(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->map_height)
+	{
+		free(info->map[i]);
+		i++;
+	}
+	free(info->map);
+}
+
 void	free_info(t_info *info)
 {
 	free(info->north_texture);
 	free(info->east_texture);
 	free(info->south_texture);
 	free(info->west_texture);
+	free_map(info);
 	free(info);
 }
 

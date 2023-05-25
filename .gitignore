@@ -7,9 +7,9 @@
 
 # Project
 cub3D
+maps/*
 
 # MLX42
 MLX42/build/*
 
 # PNG
-robe_of_agony.png

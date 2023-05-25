@@ -6,13 +6,14 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:33:10 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/24 17:33:19 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/25 19:59:36 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "MLX42.h"
 #include "raycaster.h"
+#include "set_background.h"
 #include "stop.h"
 
 static void	move_player(t_raycaster *rc, double move_x, double move_y)
@@ -21,6 +22,16 @@ static void	move_player(t_raycaster *rc, double move_x, double move_y)
 		rc->px += move_x;
 	if (rc->map[(int)(rc->py + move_y)][(int)rc->px] == 0)
 		rc->py += move_y;
+}
+
+static void	change_pitch(t_raycaster *rc, int change)
+{
+	if (rc->pitch + change > -1 * (rc->screen_height / 2)
+		&& rc->pitch + change < rc->screen_height / 2)
+	{
+		rc->pitch += change;
+		set_background(*rc);
+	}
 }
 
 void	rotate_player(t_raycaster *rc, double rot)
@@ -59,4 +70,8 @@ void	movement(t_raycaster *rc)
 		move_player(rc, move_y, -move_x);
 	if (mlx_is_key_down(mlx, MLX_KEY_D))
 		move_player(rc, -move_y, move_x);
+	if (mlx_is_key_down(mlx, MLX_KEY_KP_ADD))
+		change_pitch(rc, 10);
+	if (mlx_is_key_down(mlx, MLX_KEY_KP_SUBTRACT))
+		change_pitch(rc, -10);
 }

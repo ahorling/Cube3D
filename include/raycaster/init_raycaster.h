@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   init_raycaster.h                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/10 16:19:23 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/25 19:51:36 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/25 20:08:02 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/25 20:09:04 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "cub3d.h"
-#include "errors.h"
-#include "info.h"
-#include "parser.h"
+#ifndef INIT_RAYCASTER_H
+# define INIT_RAYCASTER_H
 
-// void	leaks(void)
-// {
-// 	system("leaks -q cub3D");
-// }
+# include "info.h"
+# include "raycaster.h"
 
-// atexit(leaks);
-int	main(int argc, char **argv)
-{
-	t_info	*info;
+t_raycaster	init_raycaster(t_info *info);
 
-	info = NULL;
-	if (argc != 2)
-		argument_error();
-	info = parse_input(argc, argv);
-	cub3d(info);
-	free_info(info);
-	exit(EXIT_SUCCESS);
-}
+#endif

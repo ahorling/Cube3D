@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/17 13:52:54 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:09:41 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/25 20:01:44 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_raycaster
 {
 	mlx_image_t		*background;
 	mlx_image_t		*screen;
+	mlx_image_t		*minimap;
 	int				floor_color;
 	int				ceiling_color;
 	int				color;

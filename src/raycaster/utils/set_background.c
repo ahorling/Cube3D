@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
+/*   set_background.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/05/10 16:19:23 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/25 19:51:36 by fholwerd      ########   odam.nl         */
+/*   Created: 2023/05/25 19:29:10 by fholwerd      #+#    #+#                 */
+/*   Updated: 2023/05/25 19:31:46 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "cub3d.h"
-#include "errors.h"
-#include "info.h"
-#include "parser.h"
+#include "draw_rectangle.h"
+#include "raycaster.h"
 
-// void	leaks(void)
-// {
-// 	system("leaks -q cub3D");
-// }
-
-// atexit(leaks);
-int	main(int argc, char **argv)
+// Sets the background layer for floor and ceiling.
+void	set_background(t_raycaster rc)
 {
-	t_info	*info;
-
-	info = NULL;
-	if (argc != 2)
-		argument_error();
-	info = parse_input(argc, argv);
-	cub3d(info);
-	free_info(info);
-	exit(EXIT_SUCCESS);
+	draw_rect(rc.background,
+		rect(0, 0, rc.screen_width, rc.screen_height / 2 + rc.pitch),
+		rc.ceiling_color);
+	draw_rect(rc.background,
+		rect(0, rc.screen_height / 2 + rc.pitch,
+			rc.screen_width, rc.screen_height / 2 - rc.pitch),
+		rc.floor_color);
 }

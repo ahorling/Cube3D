@@ -6,14 +6,14 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 21:45:42 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 22:12:23 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/25 13:41:44 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "errors.h"
 
-int	error_check(const char *str)
+static int	error_check(const char *str)
 {
 	int	i;
 

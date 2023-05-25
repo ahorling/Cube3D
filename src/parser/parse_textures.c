@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:27:43 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 21:54:00 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/25 20:14:07 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static char	*find_texture(char **strings, char *id)
 	i = 0;
 	while (strings[i])
 	{
-		if (ft_strncmp(id, strings[i], 2) == 0)
+		if (ft_strncmp(id, strings[i], 3) == 0)
 			break ;
 		i++;
 	}
 	if (strings[i] == '\0')
 		texture_error(1);
-	texture_path = ft_substr(strings[i], 2, ft_strlen(strings[i]));
+	texture_path = ft_substr(strings[i], 3, ft_strlen(strings[i]));
 	if (check_dots(texture_path) == 1)
 		texture_error(2);
 	temp = ft_strrchr(texture_path, '.');
@@ -87,10 +87,10 @@ static void	check_garbage(char **strings, int map_start)
 			i++;
 		if (i >= map_start)
 			break ;
-		if (ft_strncmp(strings[i], "NO", 2) != 0 \
-			&& ft_strncmp(strings[i], "EA", 2) != 0 \
-			&& ft_strncmp(strings[i], "SO", 2) != 0 \
-			&& ft_strncmp(strings[i], "WE", 2) != 0 \
+		if (ft_strncmp(strings[i], "NO ", 3) != 0 \
+			&& ft_strncmp(strings[i], "EA ", 3) != 0 \
+			&& ft_strncmp(strings[i], "SO ", 3) != 0 \
+			&& ft_strncmp(strings[i], "WE ", 3) != 0 \
 			&& ft_strncmp(strings[i], "F", 1) != 0 \
 			&& ft_strncmp(strings[i], "C", 1) != 0)
 			garbage = true;
