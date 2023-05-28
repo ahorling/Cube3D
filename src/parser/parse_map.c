@@ -6,10 +6,11 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/22 21:05:00 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/28 11:44:49 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/28 12:34:35 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "stdbool.h"
 #include "errors.h"
 #include "find_map.h"
@@ -17,20 +18,13 @@
 #include "info.h"
 #include "map_dimensions.h"
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 /*record the relevant player information in the info struct*/
 static int	record_player(t_info *info, char **map, int i, int j)
 {
-	int	start;
-
-	start = info->mapstart;
 	info->player_direction = map[i][j];
 	info->player_x = j;
-	info->player_y = i - start;
-	j++;
+	info->player_y = i - info->mapstart;
+	map[i][j] = '0';
 	return (j);
 }
 
@@ -51,8 +45,7 @@ static void	find_player(t_info *info, char **map, int start)
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' \
 				|| map[i][j] == 'W')
 			{
-				j = record_player(info, map, i, j);
-				map[i][j - 1] = '0';
+				record_player(info, map, i, j);
 				count++;
 			}
 			j++;
@@ -68,9 +61,11 @@ static void	find_player(t_info *info, char **map, int start)
 make sure that it is a playable space*/
 static bool	check_valid(char **map, int i, int j)
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 
+	if (j == ft_strlen(map[i]) - 1)
+		return (false);
 	x = j - 1;
 	y = i - 1;
 	if (x == -1)
