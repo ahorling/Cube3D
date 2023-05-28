@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 21:30:08 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 22:11:20 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/28 12:02:00 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "ft_atoi.h"
 #include "ft_substr.h"
 #include "ft_strncmp.h"
+
+#include <stdio.h>
 
 /*Checks to see if the provided colour scheme is valid*/
 void	colour_checker(char *string)
@@ -27,8 +29,6 @@ void	colour_checker(char *string)
 	count = 0;
 	while (string[i])
 	{
-		while (string[i] == ' ')
-		i++;
 		if (string[i] == ',')
 			count++;
 		if (string[i] == '-')
@@ -46,7 +46,11 @@ int	assemble_colour(int r, int g, int b)
 {
 	int	hex;
 
-	hex = ((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) + (0xff);
+	hex = 0;
+	hex += r << 24;
+	hex += g << 16;
+	hex += b << 8;
+	hex += 0xff;
 	return (hex);
 }
 
@@ -91,7 +95,7 @@ int	get_colour(char **strings, char *id)
 	i = 0;
 	while (strings[i])
 	{
-		if (ft_strncmp(id, strings[i], 1) == 0)
+		if (ft_strncmp(id, strings[i], 2) == 0)
 			break ;
 		i++;
 	}

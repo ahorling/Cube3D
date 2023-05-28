@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 17:07:32 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/25 19:44:20 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/28 10:36:56 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "file_checker.h"
 #include "info.h"
 #include "initialize.h"
+
+#include <stdio.h>
 
 /*set the info struct to null in case of 
 memory fuckery*/
@@ -32,6 +34,7 @@ static void	set_null(t_info *info)
 	info->map_width = 0;
 	info->map_height = 0;
 	info->map = NULL;
+	info->mapstart = 0;
 }
 
 static void	free_map(t_info *info)

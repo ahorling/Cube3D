@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 17:27:43 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/25 20:14:07 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/28 11:59:49 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,25 +74,25 @@ static bool	check_duplicates(char **strings, char *id, int len)
 }
 
 /*check to see if there is any non-authorized values in the file*/
-static void	check_garbage(char **strings, int map_start)
+static void	check_garbage(char **strings, t_info *info)
 {
 	int		i;
 	bool	garbage;
 
 	i = 0;
 	garbage = false;
-	while (strings[i] && i < map_start)
+	while (strings[i] && i < info->mapstart)
 	{
 		while (!strings[i][0])
 			i++;
-		if (i >= map_start)
+		if (i >= info->mapstart)
 			break ;
 		if (ft_strncmp(strings[i], "NO ", 3) != 0 \
 			&& ft_strncmp(strings[i], "EA ", 3) != 0 \
 			&& ft_strncmp(strings[i], "SO ", 3) != 0 \
 			&& ft_strncmp(strings[i], "WE ", 3) != 0 \
-			&& ft_strncmp(strings[i], "F", 1) != 0 \
-			&& ft_strncmp(strings[i], "C", 1) != 0)
+			&& ft_strncmp(strings[i], "F ", 2) != 0 \
+			&& ft_strncmp(strings[i], "C ", 2) != 0)
 			garbage = true;
 		i++;
 	}
@@ -102,32 +102,30 @@ static void	check_garbage(char **strings, int map_start)
 
 /*find the start of the map, and then check to make sure the
 rest of the file follows the proper directions*/
-static void	check_textures(char **strings)
+static void	check_textures(t_info *info, char **strings)
 {
-	int	map_start;
-
-	map_start = find_map(strings);
-	if (map_start == -1)
+	info->mapstart = find_map(strings);
+	if (info->mapstart == -1)
 		map_error(1);
-	check_garbage(strings, map_start);
-	if (check_duplicates(strings, "NO", 2) == true)
+	check_garbage(strings, info);
+	if (check_duplicates(strings, "NO ", 3) == true)
 		texture_error(4);
-	if (check_duplicates(strings, "EA", 2) == true)
+	if (check_duplicates(strings, "EA ", 3) == true)
 		texture_error(4);
-	if (check_duplicates(strings, "SO", 2) == true)
+	if (check_duplicates(strings, "SO ", 3) == true)
 		texture_error(4);
-	if (check_duplicates(strings, "WE", 2) == true)
+	if (check_duplicates(strings, "WE ", 3) == true)
 		texture_error(4);
-	if (check_duplicates(strings, "F", 1) == true)
+	if (check_duplicates(strings, "F ", 2) == true)
 		texture_error(4);
-	if (check_duplicates(strings, "C", 1) == true)
+	if (check_duplicates(strings, "C ", 2) == true)
 		texture_error(4);
 }
 
 /*fill the info struct with the correct texture information*/
 void	get_textures(char **strings, t_info *info)
 {
-	check_textures(strings);
+	check_textures(info, strings);
 	info->north_texture = find_texture(strings, "NO ");
 	info->east_texture = find_texture(strings, "EA ");
 	info->south_texture = find_texture(strings, "SO ");

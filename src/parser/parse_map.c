@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/22 21:05:00 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/25 15:53:23 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/28 11:44:49 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	record_player(t_info *info, char **map, int i, int j)
 {
 	int	start;
 
-	start = find_map(map);
+	start = info->mapstart;
 	info->player_direction = map[i][j];
 	info->player_x = j;
 	info->player_y = i - start;
@@ -120,11 +120,11 @@ void	get_map(t_info *info, char **filecontents)
 	int	i;
 
 	i = 0;
-	mapstart = find_map(filecontents);
+	mapstart = info->mapstart;
 	find_player(info, filecontents, mapstart);
 	verify_map(filecontents, mapstart);
 	get_dimensions(info, filecontents, mapstart);
-	set_dimensions(info, filecontents, mapstart);
+	set_dimensions(info, filecontents);
 	while (filecontents[i])
 	{
 		free(filecontents[i]);

@@ -6,22 +6,22 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/24 19:38:28 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 20:24:06 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/26 11:35:02 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "errors.h"
 #include "info.h"
-#include "find_map.h"
 #include "ft_strlen.h"
 
+#include <stdio.h>
 /*transpose the map from chars to the 2D int array in info*/
 static int	record_dimensions(t_info *info, char **map, int i, int j)
 {
 	int	mapstart;
 
-	mapstart = find_map(map);
+	mapstart = info->mapstart;
 	if (!map[mapstart + i][j])
 	{
 		while (j < info->map_width)

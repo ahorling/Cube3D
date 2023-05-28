@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/18 20:15:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 21:13:32 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/28 11:49:52 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "parse_textures.h"
 #include "parse_map.h"
 
+#include <stdio.h>
 /*count how many lines there are in the provided .cub file
 so that we know how much memory we need to allocate later.*/
 int	count_lines(char *path)

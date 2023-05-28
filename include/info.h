@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/17 14:27:40 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/26 10:57:05 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_info
 	int		map_width;
 	int		map_height;
 	int		**map;
+	int		mapstart;
 } 			t_info;
 
 #endif

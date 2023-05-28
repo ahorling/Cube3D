@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 21:45:42 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/25 13:41:44 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/28 11:54:10 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	error_check(const char *str)
 	int	i;
 
 	i = 1;
+	if (!str[0])
+		return (1);
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if (str[i] < '0' || str[i] > '9')

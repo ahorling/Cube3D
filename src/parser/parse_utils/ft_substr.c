@@ -6,7 +6,7 @@
 /*   By: ahorling <ahorling@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 15:31:36 by ahorling      #+#    #+#                 */
-/*   Updated: 2023/05/24 19:34:21 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/28 11:53:12 by ahorling      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "errors.h"
 #include "ft_strlen.h"
 
+
+#include <stdio.h>
 char	*ft_substr(char *s, int start, int len)
 {
 	int		i;
