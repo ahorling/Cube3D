@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 20:05:12 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/25 20:13:11 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/28 12:54:02 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static void	set_tile_size(t_raycaster *rc)
 
 static void	load_textures(t_raycaster *rc, t_info *info)
 {
-	rc->textures[0] = load_texture(info->east_texture);
-	rc->textures[1] = load_texture(info->west_texture);
-	rc->textures[2] = load_texture(info->south_texture);
-	rc->textures[3] = load_texture(info->north_texture);
+	rc->textures[0] = load_texture(info->west_texture);
+	rc->textures[1] = load_texture(info->east_texture);
+	rc->textures[2] = load_texture(info->north_texture);
+	rc->textures[3] = load_texture(info->south_texture);
 	if (!rc->textures[0] || !rc->textures[1] || !rc->textures[2]
 		|| !rc->textures[3])
 		stop("Failed to load textures");
