@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/19 20:05:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/23 15:38:32 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/29 13:05:00 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	draw_textured_walls(t_raycaster *rc)
 		rc->tex_y = (int)rc->tex_pos;
 		rc->tex_pos += rc->tex_step;
 		rc->color = correct_color(
-				&rc->tex->pixels[(rc->tex->height * rc->tex_y
+				&rc->tex->pixels[(rc->tex->width * rc->tex_y
 					+ (rc->tex->width - rc->tex_x - 1)) * 4]);
 		put_pixel(rc->screen, rc->x, rc->y, rc->color);
 		rc->y++;

@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/25 20:05:12 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/28 12:54:02 by fholwerd      ########   odam.nl         */
+/*   Updated: 2023/05/29 13:05:40 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_raycaster	init_raycaster(t_info *info)
 	rc.map = info->map;
 	set_tile_size(&rc);
 	rc.cpx = 0;
-	rc.cpy = 0.66;
+	rc.cpy = 0.5 * ((double)rc.screen_width / (double)rc.screen_height);
 	init_player_position(&rc, info);
 	rc.rdx = 0;
 	rc.rdy = 0;

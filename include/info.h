@@ -6,7 +6,7 @@
 /*   By: fholwerd <fholwerd@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/05/13 14:09:44 by fholwerd      #+#    #+#                 */
-/*   Updated: 2023/05/28 12:22:31 by ahorling      ########   odam.nl         */
+/*   Updated: 2023/05/29 13:06:24 by fholwerd      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ typedef struct s_info
 	int		**map;
 	int		mapstart;
 	int		maplen;
-} 			t_info;
+}			t_info;
 
 #endif
